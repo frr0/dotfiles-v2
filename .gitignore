@@ -1,0 +1,14 @@
+# Backup and temporary files
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# OS & Environment artifacts
+.DS_Store
+Thumbs.db
+
+# Shell history (should never be committed)
+.zsh_history
+.bash_history
