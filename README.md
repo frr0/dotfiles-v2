@@ -68,28 +68,14 @@ cd ~/Progetti/dotfiles
 Clone the repository and run `install.sh`:
 
 ```bash
-git clone <your-repo-url> ~/Progetti/dotfiles
+git clone git@github.com:frr0/dotfiles-v2.git ~/Progetti/dotfiles
 cd ~/Progetti/dotfiles
 ./install.sh
 ```
 
 ---
 
-## Connecting to GitHub
+## Repository
 
-To push this repository to GitHub under your account (`frr0`):
+Hosted on GitHub at [frr0/dotfiles-v2](https://github.com/frr0/dotfiles-v2).
 
-```bash
-cd ~/Progetti/dotfiles
-
-# Option 1: Create a new repository via GitHub CLI
-gh repo create dotfiles --public --source=. --remote=origin --push
-
-# Option 2: If you prefer private:
-# gh repo create dotfiles --private --source=. --remote=origin --push
-
-# Option 3: If you created it on github.com manually:
-# git remote add origin git@github.com:frr0/<repo-name>.git
-# git branch -M main
-# git push -u origin main
-```
