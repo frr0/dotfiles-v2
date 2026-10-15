@@ -65,6 +65,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # Modern CLI tools
+# eza (modern ls)
 if command -v eza >/dev/null 2>&1; then
     alias ls='eza'
     alias la='eza -lah'
@@ -73,6 +74,57 @@ else
     alias ls='ls --color=auto'
     alias la='ls -lah'
     alias lh='ls -lh'
+fi
+
+# bat (modern cat with syntax highlighting & paging)
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat'
+    alias bcat='bat --paging=never'
+fi
+
+# fd (modern find)
+if command -v fd >/dev/null 2>&1; then
+    alias find='fd'
+    alias fda='fd -u'              # Unrestricted (hidden + ignored files)
+    alias fdd='fd --type d'        # Directories only
+    alias fdf='fd --type f'        # Files only
+fi
+
+# ripgrep (modern fast grep)
+if command -v rg >/dev/null 2>&1; then
+    alias rg='rg --smart-case'
+    alias rgi='rg -i'              # Case-insensitive
+    alias rgh='rg --hidden'        # Include hidden files
+    alias rgf='rg --files'         # List files searched by ripgrep
+fi
+
+# ugrep (grep with interactive query TUI)
+if command -v ugrep >/dev/null 2>&1; then
+    alias ug='ug -Q'               # Interactive query TUI mode
+    alias ugz='ug -z'              # Search inside compressed files / archives
+fi
+
+# plocate (ultra-fast locate)
+if command -v plocate >/dev/null 2>&1; then
+    alias locate='plocate'
+    alias updatedb='sudo updatedb'
+fi
+
+# htop (process viewer)
+if command -v htop >/dev/null 2>&1; then
+    alias top='htop'
+fi
+
+# fzf (fuzzy finder shortcuts & preview)
+if command -v fzf >/dev/null 2>&1; then
+    alias fz='fzf'
+    alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+
+    # Open selected file in editor with bat preview
+    fn() {
+        local file
+        file=$(fzf --preview 'bat --style=numbers --color=always --line-range :500 {}') && [[ -n "$file" ]] && ${EDITOR:-nvim} "$file"
+    }
 fi
 
 # General utilities
@@ -84,6 +136,7 @@ alias r='ranger'
 alias t='tmux'
 alias k='tmux kill-server'
 alias l='lazygit'
+alias dc+'lazydocker'
 alias h='htop'
 alias f='dolphin .'
 alias gt='gdb -tui'
@@ -100,6 +153,7 @@ alias nn='cd ~/.config/nvim/ && nvim init.lua'
 alias i3='nvim ~/.config/i3/config'
 alias zc='nvim ~/.zshrc'
 alias szc='source ~/.zshrc'
+alias stc='nvim ~/.config/starship.toml'
 
 # Navigation
 alias e='cd /mnt/c/Users/franc/'
@@ -148,9 +202,25 @@ fi
 [[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]] && source "$HOME/google-cloud-sdk/path.zsh.inc"
 [[ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]] && source "$HOME/google-cloud-sdk/completion.zsh.inc"
 
+# FZF integration with fd and bat
+if command -v fd >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d --strip-cwd-prefix --hidden --follow --exclude .git'
+fi
+
+if command -v bat >/dev/null 2>&1; then
+    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --style=numbers --color=always --line-range :500 {}'"
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
 # ------------------------------------------------------------------------------
 # 7. Plugins
 # ------------------------------------------------------------------------------
+# FZF (Key bindings: Ctrl+R history, Ctrl+T file search, Alt+C cd & completion)
+[[ -f /usr/share/fzf/key-bindings.zsh ]] && source /usr/share/fzf/key-bindings.zsh
+[[ -f /usr/share/fzf/completion.zsh ]] && source /usr/share/fzf/completion.zsh
+
 # Zsh Autosuggestions
 [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && \
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -178,4 +248,15 @@ fi
 # Starship must be initialized at the very end of .zshrc
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
+else
+    # Fallback prompt with user@hostname, SSH, and container flags
+    _fallback_prompt_precmd() {
+        local ssh_flag=""
+        [[ -n "$SSH_CONNECTION" || -n "$SSH_CLIENT" || -n "$SSH_TTY" ]] && ssh_flag="%F{magenta}[SSH]%f "
+        local container_flag=""
+        [[ -f /.dockerenv || -f /run/.containerenv || -n "$CONTAINER_ID" ]] && container_flag="%F{blue}[docker]%f "
+        PROMPT="${ssh_flag}${container_flag}%F{cyan}%n%f@%F{green}%m%f %F{blue}%~%f %# "
+    }
+    autoload -Uz add-zsh-hook
+    add-zsh-hook precmd _fallback_prompt_precmd
 fi

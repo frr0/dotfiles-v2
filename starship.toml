@@ -1,0 +1,196 @@
+# ==============================================================================
+#  STARSHIP CONFIGURATION (starship.toml)
+# ==============================================================================
+# Reference: https://starship.rs/config/
+
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Move flags (SSH, Container/Docker, Chroot, Root), User, and Hostname
+# to the very beginning of the prompt.
+format = """
+$custom\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$package\
+$c\
+$cmake\
+$python\
+$rust\
+$golang\
+$nodejs\
+$java\
+$lua\
+$jobs\
+$cmd_duration\
+$line_break\
+$character"""
+
+# Timeout for commands executed by custom modules (in milliseconds)
+command_timeout = 500
+
+# ------------------------------------------------------------------------------
+# 1. Environment & Session Flags
+# ------------------------------------------------------------------------------
+
+# SSH indicator flag - displays [🌐 SSH] when connected remotely
+[custom.ssh]
+description = "Displays SSH badge when connected remotely via SSH"
+when = 'test -n "$SSH_CONNECTION" -o -n "$SSH_CLIENT" -o -n "$SSH_TTY"'
+format = "[\\[🌐 SSH\\]]($style) "
+style = "bold bright-magenta"
+
+# Container / Docker indicator flag - displays [🐳 docker] (or container name)
+[custom.docker]
+description = "Displays Docker/Container badge when running inside a container"
+when = 'test -f /.dockerenv -o -f /run/.containerenv -o -f /run/systemd/container -o -n "$CONTAINER_ID"'
+command = '''
+if [ -f /.dockerenv ]; then
+    echo "docker"
+elif [ -n "$CONTAINER_ID" ]; then
+    echo "$CONTAINER_ID"
+elif [ -f /run/.containerenv ]; then
+    echo "podman"
+elif [ -f /run/systemd/container ]; then
+    cat /run/systemd/container 2>/dev/null || echo "container"
+else
+    echo "container"
+fi
+'''
+format = "[\\[🐳 $output\\]]($style) "
+style = "bold bright-blue"
+
+# Flatpak sandbox indicator flag
+[custom.flatpak]
+description = "Displays Flatpak badge when running inside a Flatpak sandbox"
+when = 'test -f /.flatpak-info'
+format = "[\\[📦 flatpak\\]]($style) "
+style = "bold cyan"
+
+# Chroot indicator flag
+[custom.chroot]
+description = "Displays chroot environment badge"
+when = 'test -n "$debian_chroot" -o -f /etc/debian_chroot'
+command = 'cat /etc/debian_chroot 2>/dev/null || echo "$debian_chroot"'
+format = "[\\[📦 chroot:$output\\]]($style) "
+style = "bold yellow"
+
+# Root indicator flag - displays [⚡ ROOT] when operating with root privileges (UID 0)
+[custom.root]
+description = "Displays root badge when running as superuser"
+when = 'test "$(id -u)" -eq 0'
+format = "[\\[⚡ ROOT\\]]($style) "
+style = "bold red"
+
+# ------------------------------------------------------------------------------
+# 2. User & Hostname
+# ------------------------------------------------------------------------------
+
+[username]
+show_always = true
+style_user = "bold cyan"
+style_root = "bold red"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "bold green"
+format = "[@]($style_separator)[$hostname]($style) "
+
+# ------------------------------------------------------------------------------
+# 3. Directory
+# ------------------------------------------------------------------------------
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+truncation_symbol = "…/"
+style = "bold blue"
+read_only = " 󰌾"
+home_symbol = "~"
+
+# ------------------------------------------------------------------------------
+# 4. Version Control (Git)
+# ------------------------------------------------------------------------------
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+format = "on [$symbol$branch]($style) "
+
+[git_status]
+style = "bold red"
+format = "([$all_status$ahead_behind]($style) )"
+
+# ------------------------------------------------------------------------------
+# 5. Runtimes & Languages
+# ------------------------------------------------------------------------------
+
+[docker_context]
+symbol = "🐳 "
+style = "blue bold"
+format = "via [$symbol$context]($style) "
+only_with_files = true
+
+[python]
+symbol = "🐍 "
+style = "yellow bold"
+format = "via [${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)"
+
+[rust]
+symbol = "🦀 "
+style = "bold red"
+format = "via [$symbol($version )]($style)"
+
+[golang]
+symbol = "🐹 "
+style = "bold cyan"
+format = "via [$symbol($version )]($style)"
+
+[nodejs]
+symbol = "󰎙 "
+style = "bold green"
+format = "via [$symbol($version )]($style)"
+
+[c]
+symbol = "🅒 "
+style = "bold 149"
+format = "via [$symbol($version(-$name) )]($style)"
+
+[cmake]
+symbol = "△ "
+style = "bold blue"
+format = "via [$symbol($version )]($style)"
+
+[java]
+symbol = "☕ "
+style = "bold red dimmed"
+format = "via [$symbol($version )]($style)"
+
+[lua]
+symbol = "🌙 "
+style = "bold blue"
+format = "via [$symbol($version )]($style)"
+
+# ------------------------------------------------------------------------------
+# 6. Status, Jobs & Character
+# ------------------------------------------------------------------------------
+
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+[jobs]
+symbol = "✦ "
+style = "bold white"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold yellow)"
