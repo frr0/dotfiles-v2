@@ -1,0 +1,5 @@
+[shell]
+polkit_agent = true
+
+[lockscreen]
+wallpaper = "/home/francesco/Scaricati/photo_2025-10-09_13-14-36.jpg"

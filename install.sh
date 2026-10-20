@@ -23,6 +23,7 @@ DRY_RUN=false
 ASSUME_YES=false
 SKIP_PACKAGES=false
 PACKAGES_ONLY=false
+INSTALL_VSCODE_EXT=false
 
 # Usage information
 usage() {
@@ -30,30 +31,38 @@ usage() {
 Usage: ./install.sh [OPTIONS]
 
 Options:
-  -n, --dry-run        Show actions that would be taken without modifying anything
-  -y, --yes            Automatically confirm package installation (non-interactive)
-  -s, --skip-packages  Skip package installation; only create dotfile symlinks
-  -p, --packages-only  Only install software packages; skip creating symlinks
-  -h, --help           Display this help message
+  -n, --dry-run            Show actions that would be taken without modifying anything
+  -y, --yes                Automatically confirm package installation (non-interactive)
+  -s, --skip-packages      Skip package installation; only create dotfile symlinks
+  -p, --packages-only      Only install software packages; skip creating symlinks
+  -e, --vscode-extensions  Also install missing VS Code extensions from vscode/extensions.txt
+  -h, --help               Display this help message
 
 Managed Software:
-  • vim, neovim (nvim)  - Text editors
-  • tmux                - Terminal multiplexer
-  • lazygit             - Terminal UI for git
-  • starship            - Cross-shell prompt
-  • zsh                 - Z shell
-  • fzf                 - Fuzzy finder
-  • eza                 - Modern replacement for 'ls'
-  • htop                - Interactive process viewer
-  • ranger              - Console file manager
-  • wl-clipboard/xclip  - System clipboard utilities
-  • zsh plugins         - autosuggestions, syntax-highlighting, substring-search
+  • vim, neovim (nvim)     - Text editors & LazyVim config
+  • tmux                   - Terminal multiplexer
+  • alacritty              - GPU-accelerated terminal emulator
+  • lazygit, lazydocker    - Terminal UIs for Git & Docker
+  • starship               - Cross-shell prompt
+  • zsh                    - Z shell (+ autosuggestions, syntax-highlighting, substring-search)
+  • niri, noctalia         - Scrollable-tiling Wayland compositor & desktop shell
+  • swayidle, swaylock     - Idle daemon (screensaver/DPMS/suspend) & screen locker
+  • fzf, eza, bat, fd, rg  - Modern CLI utilities (ugrep, plocate, htop, ranger, wl-clipboard)
 
 Managed Dotfiles:
-  • .zshrc        -> ~/.zshrc
-  • .tmux.conf    -> ~/.tmux.conf (and ~/.config/tmux/tmux.conf)
-  • .vimrc        -> ~/.vimrc
-  • starship.toml -> ~/.config/starship.toml
+  • .zshrc                 -> ~/.zshrc
+  • .zshenv                -> ~/.zshenv
+  • .bashrc                -> ~/.bashrc
+  • .tmux.conf             -> ~/.tmux.conf (and ~/.config/tmux/tmux.conf)
+  • .vimrc                 -> ~/.vimrc
+  • nvim/*                 -> ~/.config/nvim/*
+  • starship.toml          -> ~/.config/starship.toml
+  • alacritty/*            -> ~/.config/alacritty/alacritty.toml
+  • vscode/*               -> ~/.config/Code/User/{settings,keybindings}.json & ~/vscode-keybindings.md
+  • niri/*                 -> ~/.config/niri/{config.kdl,cfg/*.kdl}
+  • noctalia/*             -> ~/.config/noctalia/config.toml & ~/.local/state/noctalia/settings.toml
+  • swayidle/config        -> ~/.config/swayidle/config
+  • swaylock/config        -> ~/.config/swaylock/config
 
 Any existing files are safely backed up to ~/.dotfiles_backup/<timestamp>/
 before symlinks are created.
@@ -78,6 +87,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -p|--packages-only)
             PACKAGES_ONLY=true
+            shift
+            ;;
+        -e|--vscode-extensions)
+            INSTALL_VSCODE_EXT=true
             shift
             ;;
         -h|--help)
@@ -129,7 +142,9 @@ install_pacman() {
         vim
         neovim
         tmux
+        alacritty
         lazygit
+        lazydocker
         starship
         zsh
         fzf
@@ -145,6 +160,8 @@ install_pacman() {
         ripgrep
         plocate
         ugrep
+        swayidle
+        swaylock
     )
 
     local missing=()
@@ -474,11 +491,53 @@ install_packages() {
 
 # List of files to link: "source_file_rel_path:destination_path"
 LINKS=(
+    # Shell & Prompt
     ".zshrc:${HOME}/.zshrc"
+    ".zshenv:${HOME}/.zshenv"
+    ".bashrc:${HOME}/.bashrc"
+    "starship.toml:${HOME}/.config/starship.toml"
+
+    # Tmux & Terminal
     ".tmux.conf:${HOME}/.tmux.conf"
     ".tmux.conf:${HOME}/.config/tmux/tmux.conf"
+    "alacritty/alacritty.toml:${HOME}/.config/alacritty/alacritty.toml"
+
+    # Vim & Neovim (LazyVim)
     ".vimrc:${HOME}/.vimrc"
-    "starship.toml:${HOME}/.config/starship.toml"
+    "nvim/init.lua:${HOME}/.config/nvim/init.lua"
+    "nvim/lazy-lock.json:${HOME}/.config/nvim/lazy-lock.json"
+    "nvim/lazyvim.json:${HOME}/.config/nvim/lazyvim.json"
+    "nvim/stylua.toml:${HOME}/.config/nvim/stylua.toml"
+    "nvim/.neoconf.json:${HOME}/.config/nvim/.neoconf.json"
+    "nvim/lua/config/autocmds.lua:${HOME}/.config/nvim/lua/config/autocmds.lua"
+    "nvim/lua/config/keymaps.lua:${HOME}/.config/nvim/lua/config/keymaps.lua"
+    "nvim/lua/config/lazy.lua:${HOME}/.config/nvim/lua/config/lazy.lua"
+    "nvim/lua/config/options.lua:${HOME}/.config/nvim/lua/config/options.lua"
+    "nvim/lua/plugins/example.lua:${HOME}/.config/nvim/lua/plugins/example.lua"
+
+    # VS Code
+    "vscode/settings.json:${HOME}/.config/Code/User/settings.json"
+    "vscode/keybindings.json:${HOME}/.config/Code/User/keybindings.json"
+    "vscode/vscode-keybindings.md:${HOME}/vscode-keybindings.md"
+
+    # Niri Window Manager
+    "niri/config.kdl:${HOME}/.config/niri/config.kdl"
+    "niri/cfg/animation.kdl:${HOME}/.config/niri/cfg/animation.kdl"
+    "niri/cfg/autostart.kdl:${HOME}/.config/niri/cfg/autostart.kdl"
+    "niri/cfg/display.kdl:${HOME}/.config/niri/cfg/display.kdl"
+    "niri/cfg/input.kdl:${HOME}/.config/niri/cfg/input.kdl"
+    "niri/cfg/keybinds.kdl:${HOME}/.config/niri/cfg/keybinds.kdl"
+    "niri/cfg/layout.kdl:${HOME}/.config/niri/cfg/layout.kdl"
+    "niri/cfg/misc.kdl:${HOME}/.config/niri/cfg/misc.kdl"
+    "niri/cfg/rules.kdl:${HOME}/.config/niri/cfg/rules.kdl"
+
+    # Noctalia Shell
+    "noctalia/config.toml:${HOME}/.config/noctalia/config.toml"
+    "noctalia/settings.toml:${HOME}/.local/state/noctalia/settings.toml"
+
+    # Screensaver / Idle & Lockscreen
+    "swayidle/config:${HOME}/.config/swayidle/config"
+    "swaylock/config:${HOME}/.config/swaylock/config"
 )
 
 backup_made=false
@@ -514,8 +573,14 @@ link_file() {
 
     # Destination exists (file, directory, or broken/other symlink)
     if [ -e "$dest" ] || [ -L "$dest" ]; then
+        local parent_name
+        parent_name="$(basename "$(dirname "$dest")")"
+        local base_name
+        base_name="$(basename "$dest")"
+        local backup_name="${parent_name}_${base_name}"
+
         if [ "$DRY_RUN" = true ]; then
-            echo -e "  ${YELLOW}[DRY-RUN] Would back up: ${dest} -> ${BACKUP_DIR}/$(basename "$dest")${NC}"
+            echo -e "  ${YELLOW}[DRY-RUN] Would back up: ${dest} -> ${BACKUP_DIR}/${backup_name}${NC}"
             echo -e "  ${CYAN}[DRY-RUN] Would link: ${dest} -> ${src}${NC}"
             return 0
         fi
@@ -526,9 +591,9 @@ link_file() {
             backup_made=true
         fi
 
-        local backup_target="${BACKUP_DIR}/$(basename "$dest")"
+        local backup_target="${BACKUP_DIR}/${backup_name}"
         if [ -e "$backup_target" ]; then
-            backup_target="${BACKUP_DIR}/$(basename "$dest")_$(date +%s)"
+            backup_target="${BACKUP_DIR}/${backup_name}_$(date +%s)"
         fi
 
         mv "$dest" "$backup_target"
@@ -557,6 +622,51 @@ create_symlinks() {
 
         link_file "$src" "$dest"
     done
+
+    # Ensure lockscreen/desktop wallpaper exists at expected path if missing
+    local wp_src="${DOTFILES_DIR}/wallpapers/photo_2025-10-09_13-14-36.jpg"
+    local wp_dest="${HOME}/Scaricati/photo_2025-10-09_13-14-36.jpg"
+    if [ -f "$wp_src" ] && [ ! -e "$wp_dest" ]; then
+        if [ "$DRY_RUN" = true ]; then
+            echo -e "  ${CYAN}[DRY-RUN] Would restore wallpaper: ${wp_dest}${NC}"
+        else
+            mkdir -p "$(dirname "$wp_dest")"
+            cp -a "$wp_src" "$wp_dest"
+            echo -e "  ${GREEN}✓ Restored wallpaper:${NC} ${wp_dest}"
+        fi
+    fi
+    echo ""
+}
+
+install_vscode_extensions() {
+    local ext_file="${DOTFILES_DIR}/vscode/extensions.txt"
+    if [ ! -f "$ext_file" ]; then
+        return 0
+    fi
+    if ! command -v code >/dev/null 2>&1; then
+        echo -e "${YELLOW}Notice:${NC} 'code' CLI not found; skipping VS Code extension installation."
+        return 0
+    fi
+
+    echo -e "${BOLD}[Optional] Installing VS Code Extensions${NC}"
+    local installed
+    installed="$(code --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)"
+
+    while IFS= read -r ext || [ -n "$ext" ]; do
+        [[ -z "$ext" || "$ext" =~ ^# ]] && continue
+        local ext_lower
+        ext_lower="$(echo "$ext" | tr '[:upper:]' '[:lower:]')"
+        if echo "$installed" | grep -qx "$ext_lower"; then
+            echo -e "  ${GREEN}✓ Already installed:${NC} ${ext}"
+        else
+            if [ "$DRY_RUN" = true ]; then
+                echo -e "  ${CYAN}[DRY-RUN] Would install VS Code extension:${NC} ${ext}"
+            else
+                echo -e "  ${BLUE}Installing VS Code extension:${NC} ${ext}"
+                code --install-extension "$ext" --force || true
+            fi
+        fi
+    done < "$ext_file"
     echo ""
 }
 
@@ -583,9 +693,13 @@ else
     check_default_shell
 fi
 
+if [ "$INSTALL_VSCODE_EXT" = true ]; then
+    install_vscode_extensions
+fi
+
 if [ "$backup_made" = true ]; then
     echo -e "${YELLOW}Backups saved in:${NC} ${BACKUP_DIR}"
 fi
 echo -e "${GREEN}Done! Installation process finished.${NC}"
-echo -e "${CYAN}Tip:${NC} Any changes made to ~/.zshrc, ~/.tmux.conf, ~/.vimrc, or ~/.config/starship.toml are directly reflected in this repository."
+echo -e "${CYAN}Tip:${NC} Any changes made to your linked config files (zsh, tmux, vim, nvim, vscode, niri, noctalia, swayidle, swaylock) are directly reflected in this repository."
 echo -e "     To push updates, just run: ${BLUE}dot && git commit -am '...' && git push${NC}"

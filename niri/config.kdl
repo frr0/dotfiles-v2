@@ -1,0 +1,49 @@
+include "./cfg/animation.kdl"
+include "./cfg/autostart.kdl"
+include "./cfg/keybinds.kdl"
+include "./cfg/input.kdl"
+include "./cfg/display.kdl"
+include "./cfg/layout.kdl"
+include "./cfg/rules.kdl"
+include "./cfg/misc.kdl"
+
+output "HDMI-A-1" {
+    // Monitor esterno posizionato sopra
+    position x=0 y=0
+}
+
+output "eDP-1" {
+    // Laptop posizionato sotto il monitor esterno (1080 è l'altezza verticale del monitor sopra)
+    position x=0 y=1080
+}
+
+window-rule {
+    // Questa regola apre la finestra a schermo intero se è l'unica nel workspace
+    open-maximized true
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+binds {
+    // Altre scorciatoie esistenti...
+
+    // Sposta il focus al monitor in alto e in basso con Mod + K e Mod + J
+    Mod+k { focus-monitor-up; }
+    Mod+j { focus-monitor-down; }
+    Mod+Shift+Up    { move-workspace-to-monitor-up; }
+    Mod+Shift+Down  { move-workspace-to-monitor-down; }
+    Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+Shift+L hotkey-overlay-title="Lock Screen: swaylock" { spawn "swaylock" "-f"; }
+}
+
+layout {
+    // Configurazione dei bordi
+    gaps 8
+    border {
+        // Se vuoi i bordi attivi, usa "on" o definisci lo spessore
+        width 1
+    }
+
+}
+
+spawn-at-startup "swayidle"

@@ -1,0 +1,531 @@
+[
+  // ============================================================================
+  // LAZYVIM WHICH-KEY ROOT & TOP-LEVEL LEADER (ALT) BINDINGS
+  // ============================================================================
+  {
+    "key": "alt+space",
+    "command": "whichkey.show"
+  },
+  {
+    "key": "alt+,",
+    "command": "workbench.action.showAllEditorsByMostRecentlyUsed"
+  },
+  {
+    "key": "alt+/",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "alt+shift+;",
+    "command": "workbench.action.showCommands"
+  },
+  {
+    "key": "alt+.",
+    "command": "whichkey.repeatMostRecent"
+  },
+  {
+    "key": "alt+`",
+    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"
+  },
+  {
+    "key": "alt+e",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "alt+shift+e",
+    "command": "workbench.files.action.focusFilesExplorer"
+  },
+  {
+    "key": "alt+l",
+    "command": "workbench.view.extensions"
+  },
+
+  // ============================================================================
+  // LAZYVIM WHICH-KEY SUBMENU GROUPS (ALT + GROUP KEY)
+  // ============================================================================
+  // +ai (Antigravity / Copilot / Gemini)
+  {
+    "key": "alt+a",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "a"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +buffer
+  {
+    "key": "alt+b",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "b"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +code
+  {
+    "key": "alt+c",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "c"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +debug
+  {
+    "key": "alt+d",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "d"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +file/find
+  {
+    "key": "alt+f",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "f"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +git
+  {
+    "key": "alt+g",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "g"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +panel (Bottom Panel: Terminal / Output / Problems / Ports / SQL History)
+  {
+    "key": "alt+p",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "p"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +quit/session
+  {
+    "key": "alt+q",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "q"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +search
+  {
+    "key": "alt+s",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "s"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +terminal/test
+  {
+    "key": "alt+t",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "t"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +ui
+  {
+    "key": "alt+u",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "u"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +views/sidebars (All Left & Right Sidebars)
+  {
+    "key": "alt+v",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "v"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +windows
+  {
+    "key": "alt+w",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "w"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+  // +diagnostics/quickfix
+  {
+    "key": "alt+x",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "whichkey.show",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "x"
+        }
+      ]
+    },
+    "when": "!whichkeyVisible"
+  },
+
+  // ============================================================================
+  // ALLOW HOLDING ALT INSIDE WHICH-KEY MENU (OPTIONAL SECOND CHORD WITH ALT)
+  // ============================================================================
+  { "key": "alt+a", "command": "whichkey.triggerKey", "args": "a", "when": "whichkeyVisible" },
+  { "key": "alt+shift+a", "command": "whichkey.triggerKey", "args": "A", "when": "whichkeyVisible" },
+  { "key": "alt+b", "command": "whichkey.triggerKey", "args": "b", "when": "whichkeyVisible" },
+  { "key": "alt+shift+b", "command": "whichkey.triggerKey", "args": "B", "when": "whichkeyVisible" },
+  { "key": "alt+c", "command": "whichkey.triggerKey", "args": "c", "when": "whichkeyVisible" },
+  { "key": "alt+shift+c", "command": "whichkey.triggerKey", "args": "C", "when": "whichkeyVisible" },
+  { "key": "alt+d", "command": "whichkey.triggerKey", "args": "d", "when": "whichkeyVisible" },
+  { "key": "alt+shift+d", "command": "whichkey.triggerKey", "args": "D", "when": "whichkeyVisible" },
+  { "key": "alt+e", "command": "whichkey.triggerKey", "args": "e", "when": "whichkeyVisible" },
+  { "key": "alt+shift+e", "command": "whichkey.triggerKey", "args": "E", "when": "whichkeyVisible" },
+  { "key": "alt+f", "command": "whichkey.triggerKey", "args": "f", "when": "whichkeyVisible" },
+  { "key": "alt+g", "command": "whichkey.triggerKey", "args": "g", "when": "whichkeyVisible" },
+  { "key": "alt+shift+g", "command": "whichkey.triggerKey", "args": "G", "when": "whichkeyVisible" },
+  { "key": "alt+h", "command": "whichkey.triggerKey", "args": "h", "when": "whichkeyVisible" },
+  { "key": "alt+shift+h", "command": "whichkey.triggerKey", "args": "H", "when": "whichkeyVisible" },
+  { "key": "alt+i", "command": "whichkey.triggerKey", "args": "i", "when": "whichkeyVisible" },
+  { "key": "alt+j", "command": "whichkey.triggerKey", "args": "j", "when": "whichkeyVisible" },
+  { "key": "alt+shift+j", "command": "whichkey.triggerKey", "args": "J", "when": "whichkeyVisible" },
+  { "key": "alt+k", "command": "whichkey.triggerKey", "args": "k", "when": "whichkeyVisible" },
+  { "key": "alt+l", "command": "whichkey.triggerKey", "args": "l", "when": "whichkeyVisible" },
+  { "key": "alt+shift+l", "command": "whichkey.triggerKey", "args": "L", "when": "whichkeyVisible" },
+  { "key": "alt+m", "command": "whichkey.triggerKey", "args": "m", "when": "whichkeyVisible" },
+  { "key": "alt+shift+m", "command": "whichkey.triggerKey", "args": "M", "when": "whichkeyVisible" },
+  { "key": "alt+n", "command": "whichkey.triggerKey", "args": "n", "when": "whichkeyVisible" },
+  { "key": "alt+o", "command": "whichkey.triggerKey", "args": "o", "when": "whichkeyVisible" },
+  { "key": "alt+shift+o", "command": "whichkey.triggerKey", "args": "O", "when": "whichkeyVisible" },
+  { "key": "alt+p", "command": "whichkey.triggerKey", "args": "p", "when": "whichkeyVisible" },
+  { "key": "alt+shift+p", "command": "whichkey.triggerKey", "args": "P", "when": "whichkeyVisible" },
+  { "key": "alt+q", "command": "whichkey.triggerKey", "args": "q", "when": "whichkeyVisible" },
+  { "key": "alt+shift+q", "command": "whichkey.triggerKey", "args": "Q", "when": "whichkeyVisible" },
+  { "key": "alt+r", "command": "whichkey.triggerKey", "args": "r", "when": "whichkeyVisible" },
+  { "key": "alt+shift+r", "command": "whichkey.triggerKey", "args": "R", "when": "whichkeyVisible" },
+  { "key": "alt+s", "command": "whichkey.triggerKey", "args": "s", "when": "whichkeyVisible" },
+  { "key": "alt+shift+s", "command": "whichkey.triggerKey", "args": "S", "when": "whichkeyVisible" },
+  { "key": "alt+t", "command": "whichkey.triggerKey", "args": "t", "when": "whichkeyVisible" },
+  { "key": "alt+u", "command": "whichkey.triggerKey", "args": "u", "when": "whichkeyVisible" },
+  { "key": "alt+v", "command": "whichkey.triggerKey", "args": "v", "when": "whichkeyVisible" },
+  { "key": "alt+w", "command": "whichkey.triggerKey", "args": "w", "when": "whichkeyVisible" },
+  { "key": "alt+x", "command": "whichkey.triggerKey", "args": "x", "when": "whichkeyVisible" },
+  { "key": "alt+y", "command": "whichkey.triggerKey", "args": "y", "when": "whichkeyVisible" },
+  { "key": "alt+z", "command": "whichkey.triggerKey", "args": "z", "when": "whichkeyVisible" },
+  { "key": "alt+[", "command": "whichkey.triggerKey", "args": "[", "when": "whichkeyVisible" },
+  { "key": "alt+]", "command": "whichkey.triggerKey", "args": "]", "when": "whichkeyVisible" },
+  { "key": "alt+-", "command": "whichkey.triggerKey", "args": "-", "when": "whichkeyVisible" },
+  { "key": "alt+\\", "command": "whichkey.triggerKey", "args": "\\", "when": "whichkeyVisible" },
+  { "key": "alt+=", "command": "whichkey.triggerKey", "args": "=", "when": "whichkeyVisible" },
+  { "key": "backspace", "command": "whichkey.undoKey", "when": "whichkeyVisible" },
+
+  // ============================================================================
+  // LAZYVIM WINDOW NAVIGATION & RESIZE (CTRL + H/J/K/L & ARROWS)
+  // ============================================================================
+  {
+    "key": "ctrl+h",
+    "command": "workbench.action.navigateLeft",
+    "when": "!whichkeyVisible"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.navigateRight",
+    "when": "!whichkeyVisible"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.navigateUp",
+    "when": "!inQuickOpen && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.navigateDown",
+    "when": "!inQuickOpen && !suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "sideBarFocus"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+up",
+    "command": "workbench.action.increaseViewHeight"
+  },
+  {
+    "key": "ctrl+down",
+    "command": "workbench.action.decreaseViewHeight"
+  },
+  {
+    "key": "ctrl+right",
+    "command": "workbench.action.increaseViewWidth"
+  },
+  {
+    "key": "ctrl+left",
+    "command": "workbench.action.decreaseViewWidth"
+  },
+
+  // ============================================================================
+  // LAZYVIM BUFFER NAVIGATION (SHIFT + H / L)
+  // ============================================================================
+  {
+    "key": "shift+h",
+    "command": "workbench.action.previousEditor",
+    "when": "editorTextFocus && neovim.mode != 'insert' && vim.mode != 'Insert'"
+  },
+  {
+    "key": "shift+l",
+    "command": "workbench.action.nextEditor",
+    "when": "editorTextFocus && neovim.mode != 'insert' && vim.mode != 'Insert'"
+  },
+
+  // ============================================================================
+  // LAZYVIM EDITOR & TERMINAL SHORTCUTS
+  // ============================================================================
+  {
+    "key": "shift+k",
+    "command": "editor.action.showHover",
+    "when": "editorTextFocus && neovim.mode != 'insert' && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+/",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.files.save"
+  },
+
+  // ============================================================================
+  // LAZYVIM NEO-TREE / FILE EXPLORER BINDINGS
+  // ============================================================================
+  {
+    "key": "j",
+    "command": "list.focusDown",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "k",
+    "command": "list.focusUp",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "l",
+    "command": "list.select",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "enter",
+    "command": "list.select",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "h",
+    "command": "list.collapse",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "o",
+    "command": "list.toggleExpand",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "a",
+    "command": "explorer.newFile",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "shift+a",
+    "command": "explorer.newFolder",
+    "when": "filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "r",
+    "command": "renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "d",
+    "command": "deleteFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "y",
+    "command": "filesExplorer.copy",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "x",
+    "command": "filesExplorer.cut",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "p",
+    "command": "filesExplorer.paste",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "c",
+    "command": "copyRelativeFilePath",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+  {
+    "key": "/",
+    "command": "list.find",
+    "when": "explorerViewletVisible && filesExplorerFocus && !inputFocus"
+  },
+
+  // ============================================================================
+  // AUTOCOMPLETE & QUICK-OPEN NAVIGATION (CTRL+J/K & TAB/SHIFT+TAB)
+  // ============================================================================
+  {
+    "key": "ctrl+j",
+    "command": "selectNextSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "selectPrevSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    "key": "tab",
+    "command": "selectNextSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "shift+tab",
+    "command": "selectPrevSuggestion",
+    "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "workbench.action.quickOpenNavigateNext",
+    "when": "inQuickOpen"
+  },
+  {
+    "key": "ctrl+k",
+    "command": "workbench.action.quickOpenNavigatePrevious",
+    "when": "inQuickOpen"
+  },
+
+  // ============================================================================
+  // UNBIND CONFLICTING DEFAULT SHORTCUTS
+  // ============================================================================
+  {
+    "key": "enter",
+    "command": "-renameFile",
+    "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceIsRoot && !explorerResourceReadonly && !inputFocus"
+  },
+  {
+    "key": "ctrl+b",
+    "command": "-workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-workbench.action.togglePanel"
+  },
+  {
+    "key": "ctrl+l",
+    "command": "-extension.vim_navigateCtrlL"
+  },
+  {
+    "key": "ctrl+j",
+    "command": "-editor.action.insertLineAfter",
+    "when": "editorTextFocus && neovim.ctrlKeysInsert && !neovim.recording && neovim.mode == 'insert'"
+  },
+  {
+    "key": "shift+tab",
+    "command": "-acceptAlternativeSelectedSuggestion",
+    "when": "suggestWidgetVisible && textInputFocus"
+  }
+]
