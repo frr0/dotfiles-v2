@@ -1,0 +1,6 @@
+<application>
+  <component name="UISettings">
+    <option name="disableMnemonics" value="true" />
+    <option name="disableMnemonicsInControls" value="true" />
+  </component>
+</application>

@@ -18,6 +18,10 @@ Clean, version-controlled dotfiles for personal development environment, desktop
 | [`vscode/keybindings.json`](file:///home/francesco/Progetti/dotfiles/vscode/keybindings.json) | `~/.config/Code/User/keybindings.json` | VS Code LazyVim (`Alt` leader) + WhichKey + Neo-tree Explorer keybindings |
 | [`vscode/vscode-keybindings.md`](file:///home/francesco/Progetti/dotfiles/vscode/vscode-keybindings.md) | `~/vscode-keybindings.md` | Complete reference guide for all VS Code LazyVim + WhichKey keybindings |
 | [`vscode/extensions.txt`](file:///home/francesco/Progetti/dotfiles/vscode/extensions.txt) | *(Managed via `install.sh -e`)* | List of all installed VS Code extensions |
+| [`intellij/.ideavimrc`](file:///home/francesco/Progetti/dotfiles/intellij/.ideavimrc) | `~/.ideavimrc` | IdeaVim configuration with Which-Key, NERDTree, and full LazyVim keybindings |
+| [`intellij/VSCode _Migrated_.xml`](file:///home/francesco/Progetti/dotfiles/intellij/VSCode%20_Migrated_.xml) | `~/.config/JetBrains/IdeaIC2026.2/keymaps/VSCode _Migrated_.xml` | IntelliJ IDEA native keymap matching VS Code LazyVim shortcuts |
+| [`intellij/`](file:///home/francesco/Progetti/dotfiles/intellij) (`keymap.xml`, `ui.lnf.xml`, `vim_settings.xml`, `editor-font.xml`) | `~/.config/JetBrains/IdeaIC2026.2/options/` | IntelliJ active keymap selector, UI mnemonics disable, IdeaVim conflicts, and font settings |
+| [`intellij/intellij-keybindings.md`](file:///home/francesco/Progetti/dotfiles/intellij/intellij-keybindings.md) | `~/intellij-keybindings.md` | Complete reference guide for all IntelliJ IDEA LazyVim + Which-Key keybindings |
 | [`niri/config.kdl`](file:///home/francesco/Progetti/dotfiles/niri/config.kdl) & [`niri/cfg/`](file:///home/francesco/Progetti/dotfiles/niri/cfg) | `~/.config/niri/` | Niri scrollable-tiling Wayland compositor config (dual-monitor, borders, keybinds, startup) |
 | [`noctalia/config.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/config.toml) | `~/.config/noctalia/config.toml` | Noctalia shell core config (polkit agent & lockscreen wallpaper) |
 | [`noctalia/settings.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/settings.toml) | `~/.local/state/noctalia/settings.toml` | Noctalia UI state/settings (bar, dock, Gruvbox/Ayu Blue theme, lockscreen widgets, monitors) |
@@ -60,6 +64,9 @@ All configuration files in your home directory are **symbolic links** pointing t
 ~/.config/Code/User/settings.json    ───────────► ~/Progetti/dotfiles/vscode/settings.json
 ~/.config/Code/User/keybindings.json ───────────► ~/Progetti/dotfiles/vscode/keybindings.json
 ~/vscode-keybindings.md              ───────────► ~/Progetti/dotfiles/vscode/vscode-keybindings.md
+~/.ideavimrc                         ───────────► ~/Progetti/dotfiles/intellij/.ideavimrc
+~/intellij-keybindings.md            ───────────► ~/Progetti/dotfiles/intellij/intellij-keybindings.md
+~/.config/JetBrains/IdeaIC2026.2/*   ───────────► ~/Progetti/dotfiles/intellij/*.xml
 ~/.config/niri/config.kdl            ───────────► ~/Progetti/dotfiles/niri/config.kdl
 ~/.config/niri/cfg/*.kdl             ───────────► ~/Progetti/dotfiles/niri/cfg/*.kdl
 ~/.config/noctalia/config.toml       ───────────► ~/Progetti/dotfiles/noctalia/config.toml

@@ -28,7 +28,23 @@
   },
   {
     "key": "alt+e",
-    "command": "workbench.action.toggleSidebarVisibility"
+    "command": "workbench.view.explorer",
+    "when": "!explorerViewletVisible && !whichkeyVisible"
+  },
+  {
+    "key": "alt+e",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "explorerViewletVisible && !whichkeyVisible"
+  },
+  {
+    "key": "alt+[",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "!whichkeyVisible"
+  },
+  {
+    "key": "alt+]",
+    "command": "workbench.action.toggleAuxiliaryBar",
+    "when": "!whichkeyVisible"
   },
   {
     "key": "alt+shift+e",

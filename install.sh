@@ -59,6 +59,7 @@ Managed Dotfiles:
   • starship.toml          -> ~/.config/starship.toml
   • alacritty/*            -> ~/.config/alacritty/alacritty.toml
   • vscode/*               -> ~/.config/Code/User/{settings,keybindings}.json & ~/vscode-keybindings.md
+  • intellij/*             -> ~/.ideavimrc, ~/intellij-keybindings.md & ~/.config/JetBrains/IdeaIC2026.2/*
   • niri/*                 -> ~/.config/niri/{config.kdl,cfg/*.kdl}
   • noctalia/*             -> ~/.config/noctalia/config.toml & ~/.local/state/noctalia/settings.toml
   • swayidle/config        -> ~/.config/swayidle/config
@@ -519,6 +520,15 @@ LINKS=(
     "vscode/settings.json:${HOME}/.config/Code/User/settings.json"
     "vscode/keybindings.json:${HOME}/.config/Code/User/keybindings.json"
     "vscode/vscode-keybindings.md:${HOME}/vscode-keybindings.md"
+
+    # IntelliJ IDEA (IdeaVim + Which-Key + Keymap)
+    "intellij/.ideavimrc:${HOME}/.ideavimrc"
+    "intellij/intellij-keybindings.md:${HOME}/intellij-keybindings.md"
+    "intellij/VSCode _Migrated_.xml:${HOME}/.config/JetBrains/IdeaIC2026.2/keymaps/VSCode _Migrated_.xml"
+    "intellij/keymap.xml:${HOME}/.config/JetBrains/IdeaIC2026.2/options/linux/keymap.xml"
+    "intellij/ui.lnf.xml:${HOME}/.config/JetBrains/IdeaIC2026.2/options/ui.lnf.xml"
+    "intellij/vim_settings.xml:${HOME}/.config/JetBrains/IdeaIC2026.2/options/vim_settings.xml"
+    "intellij/editor-font.xml:${HOME}/.config/JetBrains/IdeaIC2026.2/options/editor-font.xml"
 
     # Niri Window Manager
     "niri/config.kdl:${HOME}/.config/niri/config.kdl"

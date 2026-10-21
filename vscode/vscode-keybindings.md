@@ -60,8 +60,10 @@ File di configurazione collegati:
 | **`Alt + :`** (`Alt+Shift+;`) | `<leader>:` | Command Palette | `workbench.action.showCommands` |
 | **`Alt + .`** | `<leader>.` | Ripeti l'ultima azione eseguita con WhichKey | `whichkey.repeatMostRecent` |
 | **`` Alt + ` ``** | `` <leader>` `` | Passa all'ultimo buffer visitato (Other Buffer) | `workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup` |
-| **`Alt + e`** | `<leader>e` | Mostra / Nascondi Sidebar Explorer | `workbench.action.toggleSidebarVisibility` |
+| **`Alt + e`** | `<leader>e` | Apri / Mostra / Nascondi Sidebar Explorer | `workbench.view.explorer` / `workbench.action.toggleSidebarVisibility` |
 | **`Alt + Shift + e`** | `<leader>E` | Rivela e seleziona il file attivo nell'Explorer | `workbench.files.action.focusFilesExplorer` |
+| **`Alt + [`** | `<leader>[` | Mostra / Nascondi Sidebar Sinistra (Primary Side Bar) | `workbench.action.toggleSidebarVisibility` |
+| **`Alt + ]`** | `<leader>]` | Mostra / Nascondi Sidebar Destra (Auxiliary Bar) | `workbench.action.toggleAuxiliaryBar` |
 | **`Alt + l`** | `<leader>l` | Apri vista Estensioni (Lazy) | `workbench.view.extensions` |
 
 ---

@@ -1,0 +1,1405 @@
+" ============================================================================
+" ~/.ideavimrc - Configurazione IdeaVim + Which-Key + NERDTree
+" Identica al 100% alla configurazione VS Code (LazyVim + WhichKey + .vimrc)
+" ============================================================================
+
+" ----------------------------------------------------------------------------
+" 1. OPZIONI BASE VIM (da ~/.vimrc & VS Code settings.json)
+" ----------------------------------------------------------------------------
+set number
+set relativenumber
+set showmode
+set showcmd
+set visualbell
+set noerrorbells
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set scrolloff=4
+set clipboard+=unnamed
+
+" Leader secondario (come "vim.leader": "<|>" in VS Code settings.json)
+let mapleader = "|"
+
+" ----------------------------------------------------------------------------
+" 2. PLUGIN IDEAVIM & INTEGRAZIONE IDE
+" ----------------------------------------------------------------------------
+set which-key
+set notimeout
+set nerdtree
+set ToolWindowNavEverywhere
+set ideaoutsideeditor
+set ideajoin
+set ideamarks
+
+" Tasti passati al popup Autocomplete/Lookup quando e' visibile:
+" Permette a Ctrl+j / Ctrl+k e Tab / Shift+Tab di scorrere i suggerimenti!
+set lookupkeys=<Tab>,<S-Tab>,<Down>,<Up>,<Enter>,<Left>,<Right>,<C-Down>,<C-Up>,<PageUp>,<PageDown>,<C-J>,<C-K>,<C-Q>
+
+" Configurazione IDEA Which-Key (popup istantaneo a 0ms come in VS Code)
+let g:WhichKey_DefaultDelay = 0
+let g:WhichKey_SortOrder = "by_key_prefix_first"
+let g:WhichKey_ShowVimActions = "true"
+let g:WhichKey_ShowTypedSequence = "true"
+let g:WhichKey_ProcessUnknownMappings = "false"
+let g:WhichKey_FontSize = 15
+let g:WhichKey_PrefixColor = "#89b4fa"
+let g:WhichKey_KeyColor = "#f9e2af"
+let g:WhichKey_CommandColor = "#cdd6f4"
+let g:WhichKey_Divider = " ➜ "
+
+" ----------------------------------------------------------------------------
+" 3. GESTIONE CONFLITTI SCORCIATOIE (sethandler)
+" ----------------------------------------------------------------------------
+sethandler <C-h> a:vim
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+sethandler <C-l> a:vim
+sethandler <C-w> a:vim
+sethandler <C-i> a:vim
+sethandler <C-m> a:vim
+sethandler <C-r> a:vim
+sethandler <C-u> a:vim
+sethandler <C-d> a:vim
+sethandler <C-f> a:vim
+sethandler <C-b> a:vim
+sethandler <C-v> a:vim
+sethandler <C-s> a:ide
+sethandler <C-/> a:ide
+
+sethandler <A-Space> a:vim
+sethandler <A-,> a:vim
+sethandler <A-/> a:vim
+sethandler <A-S-;> a:vim
+sethandler <A-.> a:vim
+sethandler <A-`> a:vim
+sethandler <A-a> a:vim
+sethandler <A-S-a> a:vim
+sethandler <A-b> a:vim
+sethandler <A-S-b> a:vim
+sethandler <A-c> a:vim
+sethandler <A-S-c> a:vim
+sethandler <A-d> a:vim
+sethandler <A-S-d> a:vim
+sethandler <A-e> a:vim
+sethandler <A-S-e> a:vim
+sethandler <A-f> a:vim
+sethandler <A-g> a:vim
+sethandler <A-S-g> a:vim
+sethandler <A-h> a:vim
+sethandler <A-S-h> a:vim
+sethandler <A-i> a:vim
+sethandler <A-j> a:vim
+sethandler <A-S-j> a:vim
+sethandler <A-k> a:vim
+sethandler <A-l> a:vim
+sethandler <A-S-l> a:vim
+sethandler <A-m> a:vim
+sethandler <A-S-m> a:vim
+sethandler <A-n> a:vim
+sethandler <A-o> a:vim
+sethandler <A-S-o> a:vim
+sethandler <A-p> a:vim
+sethandler <A-S-p> a:vim
+sethandler <A-q> a:vim
+sethandler <A-S-q> a:vim
+sethandler <A-r> a:vim
+sethandler <A-S-r> a:vim
+sethandler <A-s> a:vim
+sethandler <A-S-s> a:vim
+sethandler <A-t> a:vim
+sethandler <A-u> a:vim
+sethandler <A-v> a:vim
+sethandler <A-w> a:vim
+sethandler <A-x> a:vim
+sethandler <A-y> a:vim
+sethandler <A-z> a:vim
+sethandler <A-[> a:vim
+sethandler <A-]> a:vim
+sethandler <A--> a:vim
+sethandler <A-\> a:vim
+sethandler <A-=> a:vim
+
+" ----------------------------------------------------------------------------
+" 4. FILE EXPLORER / PROJECT VIEW (Stile Neo-tree tramite NERDTree)
+" ----------------------------------------------------------------------------
+let g:NERDTreeMapActivateNode = 'l'
+let g:NERDTreeMapPreview = 'o'
+let g:NERDTreeMapOpenSplit = 's'
+let g:NERDTreeMapOpenVSplit = 'v'
+let g:NERDTreeMapCloseDir = 'h'
+let g:NERDTreeMapCloseChildren = 'C'
+let g:NERDTreeMapNewFile = 'a'
+let g:NERDTreeMapNewDir = 'A'
+let g:NERDTreeMapRename = 'r'
+let g:NERDTreeMapDelete = 'd'
+let g:NERDTreeMapCopy = 'y'
+let g:NERDTreeMapPaste = 'p'
+let g:NERDTreeMapRefresh = 'R'
+let g:NERDTreeMapRefreshRoot = 'R'
+let g:NERDTreeMapToggleZoom = 'z'
+let g:NERDTreeMapJumpParent = 'P'
+let g:NERDTreeMapFind = '/'
+let g:NERDTreeMapQuit = 'q'
+
+" ----------------------------------------------------------------------------
+" 5. KEYBINDINGS PRE-ESISTENTI (da ~/.vimrc & VS Code settings.json)
+" ----------------------------------------------------------------------------
+" Inizio e fine riga
+nnoremap \ 0
+vnoremap \ 0
+nnoremap 1 0
+vnoremap 1 0
+nnoremap 0 $
+vnoremap 0 $
+
+" Salto tra paragrafi con + e -
+nnoremap + {
+vnoremap + {
+nnoremap - }
+vnoremap - }
+
+" Ricerca e sostituzione globale
+nmap gc :%s/
+
+" Copia fino a fine riga / intera riga senza newline
+nnoremap Y y$
+nnoremap yt 0y$
+
+" Riformatta/indenta tutto il file
+nnoremap g0 gg=GGG
+nmap g0 <Action>(ReformatCode)
+
+" Indenta/de-indenta in Visual Mode mantenendo la selezione
+vnoremap < <gv
+vnoremap > >gv
+
+" Auto-chiusura parentesi e virgolette in Insert Mode
+inoremap " ""<Left>
+inoremap ' ''<Left>
+inoremap ( ()<Left>
+inoremap [ []<Left>
+inoremap { {}<Left>
+
+" Split rapidi con Ctrl+w e Ctrl+i e compilazione con Ctrl+m (da ~/.vimrc)
+nnoremap <C-w> :vsp<CR>
+nnoremap <C-i> :split<CR>
+nnoremap <C-m> <Action>(SaveAll)<Action>(CompileDirty)
+
+" Leader '|' (da vim.normalModeKeyBindingsNonRecursive in settings.json)
+nnoremap <Bar>w <Action>(SplitVertically)
+nnoremap <Bar>f <Action>(SelectInProjectView)
+nnoremap <Bar>h _
+
+" ----------------------------------------------------------------------------
+" 6. SCORCIATOIE GLOBALI NON-LEADER (Finestre, Buffer, Hover, LSP)
+" ----------------------------------------------------------------------------
+" Navigazione tra split / finestre con Ctrl + h/j/k/l
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+vnoremap <C-h> <C-w>h
+vnoremap <C-l> <C-w>l
+vnoremap <C-j> <C-w>j
+vnoremap <C-k> <C-w>k
+
+" Navigazione Buffer / Tab con Shift + h / Shift + l
+nnoremap H <Action>(PreviousTab)
+nnoremap L <Action>(NextTab)
+vnoremap H <Action>(PreviousTab)
+vnoremap L <Action>(NextTab)
+
+" Hover / Documentazione LSP con Shift + k (K) e gh
+nnoremap K <Action>(ShowHoverInfo)
+vnoremap K <Action>(ShowHoverInfo)
+nnoremap gh <Action>(ShowHoverInfo)
+
+" Scorciatoie LSP standard LazyVim / VSCodeVim
+nnoremap gd <Action>(GotoDeclaration)
+nnoremap gD <Action>(QuickImplementations)
+nnoremap gr <Action>(ShowUsages)
+nnoremap gI <Action>(GotoImplementation)
+nnoremap gy <Action>(GotoTypeDeclaration)
+nnoremap gcc <Action>(CommentByLineComment)
+vnoremap gc <Action>(CommentByLineComment)
+
+" ----------------------------------------------------------------------------
+" 7. COMANDI DIRETTI TOP-LEVEL (ALT + <TASTO>)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_root_space     = "<A-Space><Space> Find Files"
+let g:WhichKeyDesc_root_space_alt = "<A-Space><A-Space>"
+let g:WhichKeyDesc_top_comma      = "<A-,> Switch Buffer"
+let g:WhichKeyDesc_top_slash      = "<A-/> Grep (Root Dir)"
+let g:WhichKeyDesc_top_colon      = "<A-S-;> Command Palette"
+let g:WhichKeyDesc_top_dot        = "<A-.> Repeat Last Action"
+let g:WhichKeyDesc_top_backtick   = "<A-`> Switch to Other Buffer"
+let g:WhichKeyDesc_top_explorer   = "<A-e> Explorer (Toggle Sidebar)"
+let g:WhichKeyDesc_top_explorer_f = "<A-S-e> Explorer (Reveal Active File)"
+let g:WhichKeyDesc_top_lazy       = "<A-l> Plugins / Extensions"
+
+map <A-Space><Space>   <Action>(GotoFile)
+map <A-Space><A-Space> <Action>(GotoFile)
+map <A-Space>,         <Action>(RecentFiles)
+map <A-Space><A-,>     <Action>(RecentFiles)
+map <A-Space>/         <Action>(FindInPath)
+map <A-Space><A-/>     <Action>(FindInPath)
+map <A-Space>:         <Action>(GotoAction)
+map <A-Space><A-S-;>   <Action>(GotoAction)
+map <A-Space>.         <Action>(RepeatPreviousAction)
+map <A-Space><A-.>     <Action>(RepeatPreviousAction)
+map <A-Space>`         <Action>(Switcher)
+map <A-Space><A-`>     <Action>(Switcher)
+map <A-Space>e         <Action>(ActivateProjectToolWindow)
+map <A-Space><A-e>     <Action>(ActivateProjectToolWindow)
+map <A-Space>E         <Action>(SelectInProjectView)
+map <A-Space><A-S-e>   <Action>(SelectInProjectView)
+map <A-Space>l         <Action>(WelcomeScreen.Plugins)
+map <A-Space><A-l>     <Action>(WelcomeScreen.Plugins)
+
+let g:WhichKeyDesc_root_comma      = "<A-Space>, Switch Buffer"
+let g:WhichKeyDesc_root_slash      = "<A-Space>/ Grep (Root Dir)"
+let g:WhichKeyDesc_root_colon      = "<A-Space>: Command Palette"
+let g:WhichKeyDesc_root_dot        = "<A-Space>. Repeat Last Action"
+let g:WhichKeyDesc_root_backtick   = "<A-Space>` Switch to Other Buffer"
+let g:WhichKeyDesc_root_explorer   = "<A-Space>e Explorer (Toggle File Manager)"
+let g:WhichKeyDesc_root_explorer_f = "<A-Space>E Explorer (Reveal Active File)"
+let g:WhichKeyDesc_root_lazy       = "<A-Space>l Plugins / Extensions"
+let g:WhichKeyDesc_root_comma_a    = "<A-Space><A-,>"
+let g:WhichKeyDesc_root_slash_a    = "<A-Space><A-/>"
+let g:WhichKeyDesc_root_colon_a    = "<A-Space><A-S-;>"
+let g:WhichKeyDesc_root_dot_a      = "<A-Space><A-.>"
+let g:WhichKeyDesc_root_backtick_a = "<A-Space><A-`>"
+let g:WhichKeyDesc_root_explorer_a = "<A-Space><A-e>"
+let g:WhichKeyDesc_root_expl_f_a   = "<A-Space><A-S-e>"
+let g:WhichKeyDesc_root_lazy_a     = "<A-Space><A-l>"
+
+map <A-,>   <Action>(RecentFiles)
+map <A-/>   <Action>(FindInPath)
+map <A-S-;> <Action>(GotoAction)
+map <A-.>   <Action>(RepeatPreviousAction)
+map <A-`>   <Action>(Switcher)
+map <A-e>   <Action>(ActivateProjectToolWindow)
+map <A-S-e> <Action>(SelectInProjectView)
+map <A-l>   <Action>(WelcomeScreen.Plugins)
+map <A-[>   <Action>(HideAllWindows)
+map <A-]>   <Action>(HideSideWindows)
+
+" ============================================================================
+" 8. MENU WHICH-KEY COMPLETI (ALT + <GRUPPO> + <TASTO> e ALT+SPACE + <GRUPPO>)
+" ============================================================================
+
+" ----------------------------------------------------------------------------
+" 8.1 [a] +ai (Antigravity / Copilot / Gemini / AI Assistant)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_ai       = "<A-a> +ai"
+let g:WhichKeyDesc_root_ai  = "<A-Space>a +ai"
+let g:WhichKeyDesc_root_aia = "<A-Space><A-a>"
+
+let g:WhichKeyDesc_ai_a = "<A-a>a Antigravity / AI Sidebar"
+let g:WhichKeyDesc_ai_c = "<A-a>c Copilot / AI Chat"
+let g:WhichKeyDesc_ai_i = "<A-a>i Inline Chat / Intention"
+let g:WhichKeyDesc_ai_g = "<A-a>g Gemini Code Assist Chat"
+let g:WhichKeyDesc_ai_o = "<A-a>o Gemini Outline / Structure"
+let g:WhichKeyDesc_ai_r = "<A-a>r Toggle Right Sidebar"
+
+let g:WhichKeyDesc_ai_a_alt = "<A-a><A-a>"
+let g:WhichKeyDesc_ai_c_alt = "<A-a><A-c>"
+let g:WhichKeyDesc_ai_i_alt = "<A-a><A-i>"
+let g:WhichKeyDesc_ai_g_alt = "<A-a><A-g>"
+let g:WhichKeyDesc_ai_o_alt = "<A-a><A-o>"
+let g:WhichKeyDesc_ai_r_alt = "<A-a><A-r>"
+
+let g:WhichKeyDesc_rai_a = "<A-Space>aa Antigravity / AI Sidebar"
+let g:WhichKeyDesc_rai_c = "<A-Space>ac Copilot / AI Chat"
+let g:WhichKeyDesc_rai_i = "<A-Space>ai Inline Chat / Intention"
+let g:WhichKeyDesc_rai_g = "<A-Space>ag Gemini Code Assist Chat"
+let g:WhichKeyDesc_rai_o = "<A-Space>ao Gemini Outline / Structure"
+let g:WhichKeyDesc_rai_r = "<A-Space>ar Toggle Right Sidebar"
+
+map <A-a>a     <Action>(ActivateNotificationsToolWindow)
+map <A-a><A-a> <Action>(ActivateNotificationsToolWindow)
+map <A-a>c     <Action>(ActivateNotificationsToolWindow)
+map <A-a><A-c> <Action>(ActivateNotificationsToolWindow)
+map <A-a>i     <Action>(ShowIntentionActions)
+map <A-a><A-i> <Action>(ShowIntentionActions)
+map <A-a>g     <Action>(ActivateNotificationsToolWindow)
+map <A-a><A-g> <Action>(ActivateNotificationsToolWindow)
+map <A-a>o     <Action>(ActivateStructureToolWindow)
+map <A-a><A-o> <Action>(ActivateStructureToolWindow)
+map <A-a>r     <Action>(HideSideWindows)
+map <A-a><A-r> <Action>(HideSideWindows)
+
+map <A-Space>aa <Action>(ActivateNotificationsToolWindow)
+map <A-Space>ac <Action>(ActivateNotificationsToolWindow)
+map <A-Space>ai <Action>(ShowIntentionActions)
+map <A-Space>ag <Action>(ActivateNotificationsToolWindow)
+map <A-Space>ao <Action>(ActivateStructureToolWindow)
+map <A-Space>ar <Action>(HideSideWindows)
+
+" ----------------------------------------------------------------------------
+" 8.2 [b] +buffer (Editor & Tab Aperti)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_buffer       = "<A-b> +buffer"
+let g:WhichKeyDesc_root_buffer  = "<A-Space>b +buffer"
+let g:WhichKeyDesc_root_buffera = "<A-Space><A-b>"
+
+let g:WhichKeyDesc_buf_b = "<A-b>b Switch to Other Buffer"
+let g:WhichKeyDesc_buf_d = "<A-b>d Delete Buffer"
+let g:WhichKeyDesc_buf_D = "<A-b>D Delete Buffer and Window"
+let g:WhichKeyDesc_buf_o = "<A-b>o Delete Other Buffers"
+let g:WhichKeyDesc_buf_p = "<A-b>p Toggle Pin"
+let g:WhichKeyDesc_buf_P = "<A-b>P Unpin Buffer"
+let g:WhichKeyDesc_buf_l = "<A-b>l Delete Buffers to the Left"
+let g:WhichKeyDesc_buf_r = "<A-b>r Delete Buffers to the Right"
+let g:WhichKeyDesc_buf_a = "<A-b>a Delete All Buffers"
+let g:WhichKeyDesc_buf_s = "<A-b>s Save Buffer"
+
+let g:WhichKeyDesc_buf_b_alt = "<A-b><A-b>"
+let g:WhichKeyDesc_buf_d_alt = "<A-b><A-d>"
+let g:WhichKeyDesc_buf_D_alt = "<A-b><A-S-d>"
+let g:WhichKeyDesc_buf_o_alt = "<A-b><A-o>"
+let g:WhichKeyDesc_buf_p_alt = "<A-b><A-p>"
+let g:WhichKeyDesc_buf_P_alt = "<A-b><A-S-p>"
+let g:WhichKeyDesc_buf_l_alt = "<A-b><A-l>"
+let g:WhichKeyDesc_buf_r_alt = "<A-b><A-r>"
+let g:WhichKeyDesc_buf_a_alt = "<A-b><A-a>"
+let g:WhichKeyDesc_buf_s_alt = "<A-b><A-s>"
+
+let g:WhichKeyDesc_rbuf_b = "<A-Space>bb Switch to Other Buffer"
+let g:WhichKeyDesc_rbuf_d = "<A-Space>bd Delete Buffer"
+let g:WhichKeyDesc_rbuf_D = "<A-Space>bD Delete Buffer and Window"
+let g:WhichKeyDesc_rbuf_o = "<A-Space>bo Delete Other Buffers"
+let g:WhichKeyDesc_rbuf_p = "<A-Space>bp Toggle Pin"
+let g:WhichKeyDesc_rbuf_P = "<A-Space>bP Unpin Buffer"
+let g:WhichKeyDesc_rbuf_l = "<A-Space>bl Delete Buffers to the Left"
+let g:WhichKeyDesc_rbuf_r = "<A-Space>br Delete Buffers to the Right"
+let g:WhichKeyDesc_rbuf_a = "<A-Space>ba Delete All Buffers"
+let g:WhichKeyDesc_rbuf_s = "<A-Space>bs Save Buffer"
+
+map <A-b>b       <Action>(Switcher)
+map <A-b><A-b>   <Action>(Switcher)
+map <A-b>d       <Action>(CloseContent)
+map <A-b><A-d>   <Action>(CloseContent)
+map <A-b>D       <Action>(CloseAllEditors)
+map <A-b><A-S-d> <Action>(CloseAllEditors)
+map <A-b>o       <Action>(CloseAllEditorsButActive)
+map <A-b><A-o>   <Action>(CloseAllEditorsButActive)
+map <A-b>p       <Action>(PinActiveEditorTab)
+map <A-b><A-p>   <Action>(PinActiveEditorTab)
+map <A-b>P       <Action>(PinActiveEditorTab)
+map <A-b><A-S-p> <Action>(PinActiveEditorTab)
+map <A-b>l       <Action>(CloseAllToTheLeft)
+map <A-b><A-l>   <Action>(CloseAllToTheLeft)
+map <A-b>r       <Action>(CloseAllToTheRight)
+map <A-b><A-r>   <Action>(CloseAllToTheRight)
+map <A-b>a       <Action>(CloseAllEditors)
+map <A-b><A-a>   <Action>(CloseAllEditors)
+map <A-b>s       <Action>(SaveDocument)
+map <A-b><A-s>   <Action>(SaveDocument)
+
+map <A-Space>bb <Action>(Switcher)
+map <A-Space>bd <Action>(CloseContent)
+map <A-Space>bD <Action>(CloseAllEditors)
+map <A-Space>bo <Action>(CloseAllEditorsButActive)
+map <A-Space>bp <Action>(PinActiveEditorTab)
+map <A-Space>bP <Action>(PinActiveEditorTab)
+map <A-Space>bl <Action>(CloseAllToTheLeft)
+map <A-Space>br <Action>(CloseAllToTheRight)
+map <A-Space>ba <Action>(CloseAllEditors)
+map <A-Space>bs <Action>(SaveDocument)
+
+" ----------------------------------------------------------------------------
+" 8.3 [c] +code (LSP, Azioni Codice, Formattazione)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_code       = "<A-c> +code"
+let g:WhichKeyDesc_root_code  = "<A-Space>c +code"
+let g:WhichKeyDesc_root_codea = "<A-Space><A-c>"
+
+let g:WhichKeyDesc_code_a = "<A-c>a Code Action (Quick Fix)"
+let g:WhichKeyDesc_code_A = "<A-c>A Source Action (Generate / Refactor)"
+let g:WhichKeyDesc_code_f = "<A-c>f Format Document"
+let g:WhichKeyDesc_code_r = "<A-c>r Rename Symbol"
+let g:WhichKeyDesc_code_d = "<A-c>d Line Diagnostics (Show Hover / Error)"
+let g:WhichKeyDesc_code_s = "<A-c>s Goto Symbol in File (Outline)"
+let g:WhichKeyDesc_code_S = "<A-c>S Goto Symbol in Workspace"
+let g:WhichKeyDesc_code_i = "<A-c>i Organize Imports"
+
+let g:WhichKeyDesc_code_a_alt = "<A-c><A-a>"
+let g:WhichKeyDesc_code_A_alt = "<A-c><A-S-a>"
+let g:WhichKeyDesc_code_f_alt = "<A-c><A-f>"
+let g:WhichKeyDesc_code_r_alt = "<A-c><A-r>"
+let g:WhichKeyDesc_code_d_alt = "<A-c><A-d>"
+let g:WhichKeyDesc_code_s_alt = "<A-c><A-s>"
+let g:WhichKeyDesc_code_S_alt = "<A-c><A-S-s>"
+let g:WhichKeyDesc_code_i_alt = "<A-c><A-i>"
+
+let g:WhichKeyDesc_rcode_a = "<A-Space>ca Code Action (Quick Fix)"
+let g:WhichKeyDesc_rcode_A = "<A-Space>cA Source Action (Generate / Refactor)"
+let g:WhichKeyDesc_rcode_f = "<A-Space>cf Format Document"
+let g:WhichKeyDesc_rcode_r = "<A-Space>cr Rename Symbol"
+let g:WhichKeyDesc_rcode_d = "<A-Space>cd Line Diagnostics (Show Hover / Error)"
+let g:WhichKeyDesc_rcode_s = "<A-Space>cs Goto Symbol in File (Outline)"
+let g:WhichKeyDesc_rcode_S = "<A-Space>cS Goto Symbol in Workspace"
+let g:WhichKeyDesc_rcode_i = "<A-Space>ci Organize Imports"
+
+map <A-c>a       <Action>(ShowIntentionActions)
+map <A-c><A-a>   <Action>(ShowIntentionActions)
+map <A-c>A       <Action>(Generate)
+map <A-c><A-S-a> <Action>(Generate)
+map <A-c>f       <Action>(ReformatCode)
+map <A-c><A-f>   <Action>(ReformatCode)
+map <A-c>r       <Action>(RenameElement)
+map <A-c><A-r>   <Action>(RenameElement)
+map <A-c>d       <Action>(ShowErrorDescription)
+map <A-c><A-d>   <Action>(ShowErrorDescription)
+map <A-c>s       <Action>(FileStructurePopup)
+map <A-c><A-s>   <Action>(FileStructurePopup)
+map <A-c>S       <Action>(GotoSymbol)
+map <A-c><A-S-s> <Action>(GotoSymbol)
+map <A-c>i       <Action>(OptimizeImports)
+map <A-c><A-i>   <Action>(OptimizeImports)
+
+map <A-Space>ca <Action>(ShowIntentionActions)
+map <A-Space>cA <Action>(Generate)
+map <A-Space>cf <Action>(ReformatCode)
+map <A-Space>cr <Action>(RenameElement)
+map <A-Space>cd <Action>(ShowErrorDescription)
+map <A-Space>cs <Action>(FileStructurePopup)
+map <A-Space>cS <Action>(GotoSymbol)
+map <A-Space>ci <Action>(OptimizeImports)
+
+" ----------------------------------------------------------------------------
+" 8.4 [d] +debug (Debugger)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_debug       = "<A-d> +debug"
+let g:WhichKeyDesc_root_debug  = "<A-Space>d +debug"
+let g:WhichKeyDesc_root_debuga = "<A-Space><A-d>"
+
+let g:WhichKeyDesc_dbg_b = "<A-d>b Toggle Breakpoint"
+let g:WhichKeyDesc_dbg_s = "<A-d>s Start Debugging"
+let g:WhichKeyDesc_dbg_c = "<A-d>c Continue (Resume)"
+let g:WhichKeyDesc_dbg_i = "<A-d>i Step Into"
+let g:WhichKeyDesc_dbg_o = "<A-d>o Step Out"
+let g:WhichKeyDesc_dbg_O = "<A-d>O Step Over"
+let g:WhichKeyDesc_dbg_p = "<A-d>p Pause"
+let g:WhichKeyDesc_dbg_r = "<A-d>r Restart Debugging"
+let g:WhichKeyDesc_dbg_t = "<A-d>t Terminate / Stop"
+let g:WhichKeyDesc_dbg_u = "<A-d>u Debug UI"
+
+let g:WhichKeyDesc_dbg_b_alt = "<A-d><A-b>"
+let g:WhichKeyDesc_dbg_s_alt = "<A-d><A-s>"
+let g:WhichKeyDesc_dbg_c_alt = "<A-d><A-c>"
+let g:WhichKeyDesc_dbg_i_alt = "<A-d><A-i>"
+let g:WhichKeyDesc_dbg_o_alt = "<A-d><A-o>"
+let g:WhichKeyDesc_dbg_O_alt = "<A-d><A-S-o>"
+let g:WhichKeyDesc_dbg_p_alt = "<A-d><A-p>"
+let g:WhichKeyDesc_dbg_r_alt = "<A-d><A-r>"
+let g:WhichKeyDesc_dbg_t_alt = "<A-d><A-t>"
+let g:WhichKeyDesc_dbg_u_alt = "<A-d><A-u>"
+
+let g:WhichKeyDesc_rdbg_b = "<A-Space>db Toggle Breakpoint"
+let g:WhichKeyDesc_rdbg_s = "<A-Space>ds Start Debugging"
+let g:WhichKeyDesc_rdbg_c = "<A-Space>dc Continue (Resume)"
+let g:WhichKeyDesc_rdbg_i = "<A-Space>di Step Into"
+let g:WhichKeyDesc_rdbg_o = "<A-Space>do Step Out"
+let g:WhichKeyDesc_rdbg_O = "<A-Space>dO Step Over"
+let g:WhichKeyDesc_rdbg_p = "<A-Space>dp Pause"
+let g:WhichKeyDesc_rdbg_r = "<A-Space>dr Restart Debugging"
+let g:WhichKeyDesc_rdbg_t = "<A-Space>dt Terminate / Stop"
+let g:WhichKeyDesc_rdbg_u = "<A-Space>du Debug UI"
+
+map <A-d>b       <Action>(ToggleLineBreakpoint)
+map <A-d><A-b>   <Action>(ToggleLineBreakpoint)
+map <A-d>s       <Action>(Debug)
+map <A-d><A-s>   <Action>(Debug)
+map <A-d>c       <Action>(Resume)
+map <A-d><A-c>   <Action>(Resume)
+map <A-d>i       <Action>(StepInto)
+map <A-d><A-i>   <Action>(StepInto)
+map <A-d>o       <Action>(StepOut)
+map <A-d><A-o>   <Action>(StepOut)
+map <A-d>O       <Action>(StepOver)
+map <A-d><A-S-o> <Action>(StepOver)
+map <A-d>p       <Action>(Pause)
+map <A-d><A-p>   <Action>(Pause)
+map <A-d>r       <Action>(Rerun)
+map <A-d><A-r>   <Action>(Rerun)
+map <A-d>t       <Action>(Stop)
+map <A-d><A-t>   <Action>(Stop)
+map <A-d>u       <Action>(ActivateDebugToolWindow)
+map <A-d><A-u>   <Action>(ActivateDebugToolWindow)
+
+map <A-Space>db <Action>(ToggleLineBreakpoint)
+map <A-Space>ds <Action>(Debug)
+map <A-Space>dc <Action>(Resume)
+map <A-Space>di <Action>(StepInto)
+map <A-Space>do <Action>(StepOut)
+map <A-Space>dO <Action>(StepOver)
+map <A-Space>dp <Action>(Pause)
+map <A-Space>dr <Action>(Rerun)
+map <A-Space>dt <Action>(Stop)
+map <A-Space>du <Action>(ActivateDebugToolWindow)
+
+" ----------------------------------------------------------------------------
+" 8.5 [f] +file/find (File, Progetti, Config)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_file       = "<A-f> +file/find"
+let g:WhichKeyDesc_root_file  = "<A-Space>f +file/find"
+let g:WhichKeyDesc_root_filea = "<A-Space><A-f>"
+
+let g:WhichKeyDesc_file_f = "<A-f>f Find Files"
+let g:WhichKeyDesc_file_n = "<A-f>n New File (Scratch)"
+let g:WhichKeyDesc_file_r = "<A-f>r Recent Files"
+let g:WhichKeyDesc_file_b = "<A-f>b Buffers"
+let g:WhichKeyDesc_file_c = "<A-f>c Find Config File (Settings)"
+let g:WhichKeyDesc_file_k = "<A-f>k Find Keybindings (Edit .ideavimrc)"
+let g:WhichKeyDesc_file_p = "<A-f>p Open Project / Folder"
+let g:WhichKeyDesc_file_s = "<A-f>s Save File"
+let g:WhichKeyDesc_file_S = "<A-f>S Save All Files"
+let g:WhichKeyDesc_file_e = "<A-f>e Explorer"
+let g:WhichKeyDesc_file_t = "<A-f>t Terminal"
+
+let g:WhichKeyDesc_file_f_alt = "<A-f><A-f>"
+let g:WhichKeyDesc_file_n_alt = "<A-f><A-n>"
+let g:WhichKeyDesc_file_r_alt = "<A-f><A-r>"
+let g:WhichKeyDesc_file_b_alt = "<A-f><A-b>"
+let g:WhichKeyDesc_file_c_alt = "<A-f><A-c>"
+let g:WhichKeyDesc_file_k_alt = "<A-f><A-k>"
+let g:WhichKeyDesc_file_p_alt = "<A-f><A-p>"
+let g:WhichKeyDesc_file_s_alt = "<A-f><A-s>"
+let g:WhichKeyDesc_file_S_alt = "<A-f><A-S-s>"
+let g:WhichKeyDesc_file_e_alt = "<A-f><A-e>"
+let g:WhichKeyDesc_file_t_alt = "<A-f><A-t>"
+
+let g:WhichKeyDesc_rfile_f = "<A-Space>ff Find Files"
+let g:WhichKeyDesc_rfile_n = "<A-Space>fn New File (Scratch)"
+let g:WhichKeyDesc_rfile_r = "<A-Space>fr Recent Files"
+let g:WhichKeyDesc_rfile_b = "<A-Space>fb Buffers"
+let g:WhichKeyDesc_rfile_c = "<A-Space>fc Find Config File (Settings)"
+let g:WhichKeyDesc_rfile_k = "<A-Space>fk Find Keybindings (Edit .ideavimrc)"
+let g:WhichKeyDesc_rfile_p = "<A-Space>fp Open Project / Folder"
+let g:WhichKeyDesc_rfile_s = "<A-Space>fs Save File"
+let g:WhichKeyDesc_rfile_S = "<A-Space>fS Save All Files"
+let g:WhichKeyDesc_rfile_e = "<A-Space>fe Explorer"
+let g:WhichKeyDesc_rfile_t = "<A-Space>ft Terminal"
+
+map <A-f>f       <Action>(GotoFile)
+map <A-f><A-f>   <Action>(GotoFile)
+map <A-f>n       <Action>(NewScratchFile)
+map <A-f><A-n>   <Action>(NewScratchFile)
+map <A-f>r       <Action>(RecentFiles)
+map <A-f><A-r>   <Action>(RecentFiles)
+map <A-f>b       <Action>(RecentFiles)
+map <A-f><A-b>   <Action>(RecentFiles)
+map <A-f>c       <Action>(ShowSettings)
+map <A-f><A-c>   <Action>(ShowSettings)
+map <A-f>k       :e ~/.ideavimrc<CR>
+map <A-f><A-k>   :e ~/.ideavimrc<CR>
+map <A-f>p       <Action>(OpenFile)
+map <A-f><A-p>   <Action>(OpenFile)
+map <A-f>s       <Action>(SaveDocument)
+map <A-f><A-s>   <Action>(SaveDocument)
+map <A-f>S       <Action>(SaveAll)
+map <A-f><A-S-s> <Action>(SaveAll)
+map <A-f>e       <Action>(ActivateProjectToolWindow)
+map <A-f><A-e>   <Action>(ActivateProjectToolWindow)
+map <A-f>t       <Action>(ActivateTerminalToolWindow)
+map <A-f><A-t>   <Action>(ActivateTerminalToolWindow)
+
+map <A-Space>ff <Action>(GotoFile)
+map <A-Space>fn <Action>(NewScratchFile)
+map <A-Space>fr <Action>(RecentFiles)
+map <A-Space>fb <Action>(RecentFiles)
+map <A-Space>fc <Action>(ShowSettings)
+map <A-Space>fk :e ~/.ideavimrc<CR>
+map <A-Space>fp <Action>(OpenFile)
+map <A-Space>fs <Action>(SaveDocument)
+map <A-Space>fS <Action>(SaveAll)
+map <A-Space>fe <Action>(ActivateProjectToolWindow)
+map <A-Space>ft <Action>(ActivateTerminalToolWindow)
+
+" ----------------------------------------------------------------------------
+" 8.6 [g] +git (Source Control & Git)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_git       = "<A-g> +git"
+let g:WhichKeyDesc_root_git  = "<A-Space>g +git"
+let g:WhichKeyDesc_root_gita = "<A-Space><A-g>"
+
+let g:WhichKeyDesc_git_g = "<A-g>g Source Control (Commit / Status)"
+let g:WhichKeyDesc_git_c = "<A-g>c Git Commit"
+let g:WhichKeyDesc_git_p = "<A-g>p Git Push"
+let g:WhichKeyDesc_git_P = "<A-g>P Git Pull"
+let g:WhichKeyDesc_git_f = "<A-g>f Git Fetch"
+let g:WhichKeyDesc_git_b = "<A-g>b Checkout Branch"
+let g:WhichKeyDesc_git_B = "<A-g>B Toggle Line Blame (Annotate)"
+let g:WhichKeyDesc_git_d = "<A-g>d Diff File"
+let g:WhichKeyDesc_git_s = "<A-g>s Stage / Add File"
+let g:WhichKeyDesc_git_u = "<A-g>u Unstage / Reset File"
+let g:WhichKeyDesc_git_r = "<A-g>r Revert / Rollback File"
+let g:WhichKeyDesc_git_l = "<A-g>l Git Log / History"
+
+let g:WhichKeyDesc_git_g_alt = "<A-g><A-g>"
+let g:WhichKeyDesc_git_c_alt = "<A-g><A-c>"
+let g:WhichKeyDesc_git_p_alt = "<A-g><A-p>"
+let g:WhichKeyDesc_git_P_alt = "<A-g><A-S-p>"
+let g:WhichKeyDesc_git_f_alt = "<A-g><A-f>"
+let g:WhichKeyDesc_git_b_alt = "<A-g><A-b>"
+let g:WhichKeyDesc_git_B_alt = "<A-g><A-S-b>"
+let g:WhichKeyDesc_git_d_alt = "<A-g><A-d>"
+let g:WhichKeyDesc_git_s_alt = "<A-g><A-s>"
+let g:WhichKeyDesc_git_u_alt = "<A-g><A-u>"
+let g:WhichKeyDesc_git_r_alt = "<A-g><A-r>"
+let g:WhichKeyDesc_git_l_alt = "<A-g><A-l>"
+
+let g:WhichKeyDesc_rgit_g = "<A-Space>gg Source Control (Commit / Status)"
+let g:WhichKeyDesc_rgit_c = "<A-Space>gc Git Commit"
+let g:WhichKeyDesc_rgit_p = "<A-Space>gp Git Push"
+let g:WhichKeyDesc_rgit_P = "<A-Space>gP Git Pull"
+let g:WhichKeyDesc_rgit_f = "<A-Space>gf Git Fetch"
+let g:WhichKeyDesc_rgit_b = "<A-Space>gb Checkout Branch"
+let g:WhichKeyDesc_rgit_B = "<A-Space>gB Toggle Line Blame (Annotate)"
+let g:WhichKeyDesc_rgit_d = "<A-Space>gd Diff File"
+let g:WhichKeyDesc_rgit_s = "<A-Space>gs Stage / Add File"
+let g:WhichKeyDesc_rgit_u = "<A-Space>gu Unstage / Reset File"
+let g:WhichKeyDesc_rgit_r = "<A-Space>gr Revert / Rollback File"
+let g:WhichKeyDesc_rgit_l = "<A-Space>gl Git Log / History"
+
+map <A-g>g       <Action>(ActivateCommitToolWindow)
+map <A-g><A-g>   <Action>(ActivateCommitToolWindow)
+map <A-g>c       <Action>(CheckinProject)
+map <A-g><A-c>   <Action>(CheckinProject)
+map <A-g>p       <Action>(Vcs.Push)
+map <A-g><A-p>   <Action>(Vcs.Push)
+map <A-g>P       <Action>(Git.Pull)
+map <A-g><A-S-p> <Action>(Git.Pull)
+map <A-g>f       <Action>(Git.Fetch)
+map <A-g><A-f>   <Action>(Git.Fetch)
+map <A-g>b       <Action>(Git.Branches)
+map <A-g><A-b>   <Action>(Git.Branches)
+map <A-g>B       <Action>(Annotate)
+map <A-g><A-S-b> <Action>(Annotate)
+map <A-g>d       <Action>(Compare.SameVersion)
+map <A-g><A-d>   <Action>(Compare.SameVersion)
+map <A-g>s       <Action>(Git.Add)
+map <A-g><A-s>   <Action>(Git.Add)
+map <A-g>u       <Action>(ChangesView.Revert)
+map <A-g><A-u>   <Action>(ChangesView.Revert)
+map <A-g>r       <Action>(ChangesView.Revert)
+map <A-g><A-r>   <Action>(ChangesView.Revert)
+map <A-g>l       <Action>(Vcs.ShowTabbedFileHistory)
+map <A-g><A-l>   <Action>(Vcs.ShowTabbedFileHistory)
+
+map <A-Space>gg <Action>(ActivateCommitToolWindow)
+map <A-Space>gc <Action>(CheckinProject)
+map <A-Space>gp <Action>(Vcs.Push)
+map <A-Space>gP <Action>(Git.Pull)
+map <A-Space>gf <Action>(Git.Fetch)
+map <A-Space>gb <Action>(Git.Branches)
+map <A-Space>gB <Action>(Annotate)
+map <A-Space>gd <Action>(Compare.SameVersion)
+map <A-Space>gs <Action>(Git.Add)
+map <A-Space>gu <Action>(ChangesView.Revert)
+map <A-Space>gr <Action>(ChangesView.Revert)
+map <A-Space>gl <Action>(Vcs.ShowTabbedFileHistory)
+
+" ----------------------------------------------------------------------------
+" 8.7 [p] +panel (Pannello Inferiore: Terminal, Output, SQL, Services, Problems)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_panel       = "<A-p> +panel"
+let g:WhichKeyDesc_root_panel  = "<A-Space>p +panel"
+let g:WhichKeyDesc_root_panela = "<A-Space><A-p>"
+
+let g:WhichKeyDesc_pnl_p = "<A-p>p Toggle Bottom Panel"
+let g:WhichKeyDesc_pnl_m = "<A-p>m Maximize / Restore Panel"
+let g:WhichKeyDesc_pnl_t = "<A-p>t Terminal"
+let g:WhichKeyDesc_pnl_x = "<A-p>x Problems"
+let g:WhichKeyDesc_pnl_o = "<A-p>o Output (Run Panel)"
+let g:WhichKeyDesc_pnl_d = "<A-p>d Debug Console"
+let g:WhichKeyDesc_pnl_r = "<A-p>r Ports / Services"
+let g:WhichKeyDesc_pnl_h = "<A-p>h SQL History (Services)"
+let g:WhichKeyDesc_pnl_H = "<A-p>H SQL History (Database)"
+let g:WhichKeyDesc_pnl_q = "<A-p>q SQL Query Result"
+let g:WhichKeyDesc_pnl_Q = "<A-p>Q SQL Query Results (DataCloud)"
+let g:WhichKeyDesc_pnl_s = "<A-p>s SQL Script Output"
+let g:WhichKeyDesc_pnl_e = "<A-p>e SQL Explain Plan"
+let g:WhichKeyDesc_pnl_a = "<A-p>a SQL Autotrace"
+let g:WhichKeyDesc_pnl_k = "<A-p>k SQL Task Monitor"
+let g:WhichKeyDesc_pnl_v = "<A-p>v SQL Variables"
+let g:WhichKeyDesc_pnl_f = "<A-p>f DB Full-Text Search"
+let g:WhichKeyDesc_pnl_g = "<A-p>g Git Log / Graph"
+let g:WhichKeyDesc_pnl_j = "<A-p>j Python / Jupyter Console"
+let g:WhichKeyDesc_pnl_u = "<A-p>u Serial Monitor / Services"
+
+let g:WhichKeyDesc_pnl_p_alt = "<A-p><A-p>"
+let g:WhichKeyDesc_pnl_m_alt = "<A-p><A-m>"
+let g:WhichKeyDesc_pnl_t_alt = "<A-p><A-t>"
+let g:WhichKeyDesc_pnl_x_alt = "<A-p><A-x>"
+let g:WhichKeyDesc_pnl_o_alt = "<A-p><A-o>"
+let g:WhichKeyDesc_pnl_d_alt = "<A-p><A-d>"
+let g:WhichKeyDesc_pnl_r_alt = "<A-p><A-r>"
+let g:WhichKeyDesc_pnl_h_alt = "<A-p><A-h>"
+let g:WhichKeyDesc_pnl_H_alt = "<A-p><A-S-h>"
+let g:WhichKeyDesc_pnl_q_alt = "<A-p><A-q>"
+let g:WhichKeyDesc_pnl_Q_alt = "<A-p><A-S-q>"
+let g:WhichKeyDesc_pnl_s_alt = "<A-p><A-s>"
+let g:WhichKeyDesc_pnl_e_alt = "<A-p><A-e>"
+let g:WhichKeyDesc_pnl_a_alt = "<A-p><A-a>"
+let g:WhichKeyDesc_pnl_k_alt = "<A-p><A-k>"
+let g:WhichKeyDesc_pnl_v_alt = "<A-p><A-v>"
+let g:WhichKeyDesc_pnl_f_alt = "<A-p><A-f>"
+let g:WhichKeyDesc_pnl_g_alt = "<A-p><A-g>"
+let g:WhichKeyDesc_pnl_j_alt = "<A-p><A-j>"
+let g:WhichKeyDesc_pnl_u_alt = "<A-p><A-u>"
+
+let g:WhichKeyDesc_rpnl_p = "<A-Space>pp Toggle Bottom Panel"
+let g:WhichKeyDesc_rpnl_m = "<A-Space>pm Maximize / Restore Panel"
+let g:WhichKeyDesc_rpnl_t = "<A-Space>pt Terminal"
+let g:WhichKeyDesc_rpnl_x = "<A-Space>px Problems"
+let g:WhichKeyDesc_rpnl_o = "<A-Space>po Output (Run Panel)"
+let g:WhichKeyDesc_rpnl_d = "<A-Space>pd Debug Console"
+let g:WhichKeyDesc_rpnl_r = "<A-Space>pr Ports / Services"
+let g:WhichKeyDesc_rpnl_h = "<A-Space>ph SQL History (Services)"
+let g:WhichKeyDesc_rpnl_H = "<A-Space>pH SQL History (Database)"
+let g:WhichKeyDesc_rpnl_q = "<A-Space>pq SQL Query Result"
+let g:WhichKeyDesc_rpnl_Q = "<A-Space>pQ SQL Query Results (DataCloud)"
+let g:WhichKeyDesc_rpnl_s = "<A-Space>ps SQL Script Output"
+let g:WhichKeyDesc_rpnl_e = "<A-Space>pe SQL Explain Plan"
+let g:WhichKeyDesc_rpnl_a = "<A-Space>pa SQL Autotrace"
+let g:WhichKeyDesc_rpnl_k = "<A-Space>pk SQL Task Monitor"
+let g:WhichKeyDesc_rpnl_v = "<A-Space>pv SQL Variables"
+let g:WhichKeyDesc_rpnl_f = "<A-Space>pf DB Full-Text Search"
+let g:WhichKeyDesc_rpnl_g = "<A-Space>pg Git Log / Graph"
+let g:WhichKeyDesc_rpnl_j = "<A-Space>pj Python / Jupyter Console"
+let g:WhichKeyDesc_rpnl_u = "<A-Space>pu Serial Monitor / Services"
+
+map <A-p>p       <Action>(HideActiveWindow)
+map <A-p><A-p>   <Action>(HideActiveWindow)
+map <A-p>m       <Action>(MaximizeToolWindow)
+map <A-p><A-m>   <Action>(MaximizeToolWindow)
+map <A-p>t       <Action>(ActivateTerminalToolWindow)
+map <A-p><A-t>   <Action>(ActivateTerminalToolWindow)
+map <A-p>x       <Action>(ActivateProblemsViewToolWindow)
+map <A-p><A-x>   <Action>(ActivateProblemsViewToolWindow)
+map <A-p>o       <Action>(ActivateRunToolWindow)
+map <A-p><A-o>   <Action>(ActivateRunToolWindow)
+map <A-p>d       <Action>(ActivateDebugToolWindow)
+map <A-p><A-d>   <Action>(ActivateDebugToolWindow)
+map <A-p>r       <Action>(ActivateServicesToolWindow)
+map <A-p><A-r>   <Action>(ActivateServicesToolWindow)
+map <A-p>h       <Action>(ActivateServicesToolWindow)
+map <A-p><A-h>   <Action>(ActivateServicesToolWindow)
+map <A-p>H       <Action>(ActivateServicesToolWindow)
+map <A-p><A-S-h> <Action>(ActivateServicesToolWindow)
+map <A-p>q       <Action>(ActivateServicesToolWindow)
+map <A-p><A-q>   <Action>(ActivateServicesToolWindow)
+map <A-p>Q       <Action>(ActivateServicesToolWindow)
+map <A-p><A-S-q> <Action>(ActivateServicesToolWindow)
+map <A-p>s       <Action>(ActivateServicesToolWindow)
+map <A-p><A-s>   <Action>(ActivateServicesToolWindow)
+map <A-p>e       <Action>(ActivateServicesToolWindow)
+map <A-p><A-e>   <Action>(ActivateServicesToolWindow)
+map <A-p>a       <Action>(ActivateServicesToolWindow)
+map <A-p><A-a>   <Action>(ActivateServicesToolWindow)
+map <A-p>k       <Action>(ActivateServicesToolWindow)
+map <A-p><A-k>   <Action>(ActivateServicesToolWindow)
+map <A-p>v       <Action>(ActivateServicesToolWindow)
+map <A-p><A-v>   <Action>(ActivateServicesToolWindow)
+map <A-p>f       <Action>(ActivateFindToolWindow)
+map <A-p><A-f>   <Action>(ActivateFindToolWindow)
+map <A-p>g       <Action>(ActivateVersionControlToolWindow)
+map <A-p><A-g>   <Action>(ActivateVersionControlToolWindow)
+map <A-p>j       <Action>(ActivatePythonConsoleToolWindow)
+map <A-p><A-j>   <Action>(ActivatePythonConsoleToolWindow)
+map <A-p>u       <Action>(ActivateServicesToolWindow)
+map <A-p><A-u>   <Action>(ActivateServicesToolWindow)
+
+map <A-Space>pp <Action>(HideActiveWindow)
+map <A-Space>pm <Action>(MaximizeToolWindow)
+map <A-Space>pt <Action>(ActivateTerminalToolWindow)
+map <A-Space>px <Action>(ActivateProblemsViewToolWindow)
+map <A-Space>po <Action>(ActivateRunToolWindow)
+map <A-Space>pd <Action>(ActivateDebugToolWindow)
+map <A-Space>pr <Action>(ActivateServicesToolWindow)
+map <A-Space>ph <Action>(ActivateServicesToolWindow)
+map <A-Space>pH <Action>(ActivateServicesToolWindow)
+map <A-Space>pq <Action>(ActivateServicesToolWindow)
+map <A-Space>pQ <Action>(ActivateServicesToolWindow)
+map <A-Space>ps <Action>(ActivateServicesToolWindow)
+map <A-Space>pe <Action>(ActivateServicesToolWindow)
+map <A-Space>pa <Action>(ActivateServicesToolWindow)
+map <A-Space>pk <Action>(ActivateServicesToolWindow)
+map <A-Space>pv <Action>(ActivateServicesToolWindow)
+map <A-Space>pf <Action>(ActivateFindToolWindow)
+map <A-Space>pg <Action>(ActivateVersionControlToolWindow)
+map <A-Space>pj <Action>(ActivatePythonConsoleToolWindow)
+map <A-Space>pu <Action>(ActivateServicesToolWindow)
+
+" ----------------------------------------------------------------------------
+" 8.8 [q] +quit/session (Chiusura & Reload)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_quit       = "<A-q> +quit/session"
+let g:WhichKeyDesc_root_quit  = "<A-Space>q +quit/session"
+let g:WhichKeyDesc_root_quita = "<A-Space><A-q>"
+
+let g:WhichKeyDesc_quit_q = "<A-q>q Quit IDE"
+let g:WhichKeyDesc_quit_w = "<A-q>w Close Project Window"
+let g:WhichKeyDesc_quit_f = "<A-q>f Close Project / Folder"
+let g:WhichKeyDesc_quit_r = "<A-q>r Reload ~/.ideavimrc & Disk"
+
+let g:WhichKeyDesc_quit_q_alt = "<A-q><A-q>"
+let g:WhichKeyDesc_quit_w_alt = "<A-q><A-w>"
+let g:WhichKeyDesc_quit_f_alt = "<A-q><A-f>"
+let g:WhichKeyDesc_quit_r_alt = "<A-q><A-r>"
+
+let g:WhichKeyDesc_rquit_q = "<A-Space>qq Quit IDE"
+let g:WhichKeyDesc_rquit_w = "<A-Space>qw Close Project Window"
+let g:WhichKeyDesc_rquit_f = "<A-Space>qf Close Project / Folder"
+let g:WhichKeyDesc_rquit_r = "<A-Space>qr Reload ~/.ideavimrc & Disk"
+
+map <A-q>q     <Action>(Exit)
+map <A-q><A-q> <Action>(Exit)
+map <A-q>w     <Action>(CloseProject)
+map <A-q><A-w> <Action>(CloseProject)
+map <A-q>f     <Action>(CloseProject)
+map <A-q><A-f> <Action>(CloseProject)
+map <A-q>r     <Action>(IdeaVim.ReloadVimRc.reload)<Action>(Synchronize)
+map <A-q><A-r> <Action>(IdeaVim.ReloadVimRc.reload)<Action>(Synchronize)
+
+map <A-Space>qq <Action>(Exit)
+map <A-Space>qw <Action>(CloseProject)
+map <A-Space>qf <Action>(CloseProject)
+map <A-Space>qr <Action>(IdeaVim.ReloadVimRc.reload)<Action>(Synchronize)
+
+" ----------------------------------------------------------------------------
+" 8.9 [s] +search (Ricerca & Sostituzione)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_search       = "<A-s> +search"
+let g:WhichKeyDesc_root_search  = "<A-Space>s +search"
+let g:WhichKeyDesc_root_searcha = "<A-Space><A-s>"
+
+let g:WhichKeyDesc_srch_g = "<A-s>g Grep (Root Dir)"
+let g:WhichKeyDesc_srch_w = "<A-s>w Word in Files"
+let g:WhichKeyDesc_srch_b = "<A-s>b Buffer Lines (Find in File)"
+let g:WhichKeyDesc_srch_r = "<A-s>r Replace in Files"
+let g:WhichKeyDesc_srch_R = "<A-s>R Replace in Buffer"
+let g:WhichKeyDesc_srch_s = "<A-s>s Goto Symbol (File)"
+let g:WhichKeyDesc_srch_S = "<A-s>S Goto Symbol (Workspace)"
+let g:WhichKeyDesc_srch_c = "<A-s>c Commands (Goto Action)"
+let g:WhichKeyDesc_srch_d = "<A-s>d Diagnostics (Problems)"
+let g:WhichKeyDesc_srch_k = "<A-s>k Keymaps"
+let g:WhichKeyDesc_srch_u = "<A-s>u Colorscheme (Quick Change Scheme)"
+
+let g:WhichKeyDesc_srch_g_alt = "<A-s><A-g>"
+let g:WhichKeyDesc_srch_w_alt = "<A-s><A-w>"
+let g:WhichKeyDesc_srch_b_alt = "<A-s><A-b>"
+let g:WhichKeyDesc_srch_r_alt = "<A-s><A-r>"
+let g:WhichKeyDesc_srch_R_alt = "<A-s><A-S-r>"
+let g:WhichKeyDesc_srch_s_alt = "<A-s><A-s>"
+let g:WhichKeyDesc_srch_S_alt = "<A-s><A-S-s>"
+let g:WhichKeyDesc_srch_c_alt = "<A-s><A-c>"
+let g:WhichKeyDesc_srch_d_alt = "<A-s><A-d>"
+let g:WhichKeyDesc_srch_k_alt = "<A-s><A-k>"
+let g:WhichKeyDesc_srch_u_alt = "<A-s><A-u>"
+
+let g:WhichKeyDesc_rsrch_g = "<A-Space>sg Grep (Root Dir)"
+let g:WhichKeyDesc_rsrch_w = "<A-Space>sw Word in Files"
+let g:WhichKeyDesc_rsrch_b = "<A-Space>sb Buffer Lines (Find in File)"
+let g:WhichKeyDesc_rsrch_r = "<A-Space>sr Replace in Files"
+let g:WhichKeyDesc_rsrch_R = "<A-Space>sR Replace in Buffer"
+let g:WhichKeyDesc_rsrch_s = "<A-Space>ss Goto Symbol (File)"
+let g:WhichKeyDesc_rsrch_S = "<A-Space>sS Goto Symbol (Workspace)"
+let g:WhichKeyDesc_rsrch_c = "<A-Space>sc Commands (Goto Action)"
+let g:WhichKeyDesc_rsrch_d = "<A-Space>sd Diagnostics (Problems)"
+let g:WhichKeyDesc_rsrch_k = "<A-Space>sk Keymaps"
+let g:WhichKeyDesc_rsrch_u = "<A-Space>su Colorscheme (Quick Change Scheme)"
+
+map <A-s>g       <Action>(FindInPath)
+map <A-s><A-g>   <Action>(FindInPath)
+map <A-s>w       <Action>(SelectNextOccurrence)<Action>(FindInPath)
+map <A-s><A-w>   <Action>(SelectNextOccurrence)<Action>(FindInPath)
+map <A-s>b       <Action>(Find)
+map <A-s><A-b>   <Action>(Find)
+map <A-s>r       <Action>(ReplaceInPath)
+map <A-s><A-r>   <Action>(ReplaceInPath)
+map <A-s>R       <Action>(Replace)
+map <A-s><A-S-r> <Action>(Replace)
+map <A-s>s       <Action>(FileStructurePopup)
+map <A-s><A-s>   <Action>(FileStructurePopup)
+map <A-s>S       <Action>(GotoSymbol)
+map <A-s><A-S-s> <Action>(GotoSymbol)
+map <A-s>c       <Action>(GotoAction)
+map <A-s><A-c>   <Action>(GotoAction)
+map <A-s>d       <Action>(ActivateProblemsViewToolWindow)
+map <A-s><A-d>   <Action>(ActivateProblemsViewToolWindow)
+map <A-s>k       <Action>(ShowSettings)
+map <A-s><A-k>   <Action>(ShowSettings)
+map <A-s>u       <Action>(QuickChangeScheme)
+map <A-s><A-u>   <Action>(QuickChangeScheme)
+
+map <A-Space>sg <Action>(FindInPath)
+map <A-Space>sw <Action>(SelectNextOccurrence)<Action>(FindInPath)
+map <A-Space>sb <Action>(Find)
+map <A-Space>sr <Action>(ReplaceInPath)
+map <A-Space>sR <Action>(Replace)
+map <A-Space>ss <Action>(FileStructurePopup)
+map <A-Space>sS <Action>(GotoSymbol)
+map <A-Space>sc <Action>(GotoAction)
+map <A-Space>sd <Action>(ActivateProblemsViewToolWindow)
+map <A-Space>sk <Action>(ShowSettings)
+map <A-Space>su <Action>(QuickChangeScheme)
+
+" ----------------------------------------------------------------------------
+" 8.10 [t] +terminal/test (Terminali & Test)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_term       = "<A-t> +terminal/test"
+let g:WhichKeyDesc_root_term  = "<A-Space>t +terminal/test"
+let g:WhichKeyDesc_root_terma = "<A-Space><A-t>"
+
+let g:WhichKeyDesc_term_t = "<A-t>t Toggle Terminal"
+let g:WhichKeyDesc_term_n = "<A-t>n New Terminal"
+let g:WhichKeyDesc_term_f = "<A-t>f Focus Terminal"
+let g:WhichKeyDesc_term_m = "<A-t>m Maximize Panel"
+let g:WhichKeyDesc_term_s = "<A-t>s Split Terminal"
+let g:WhichKeyDesc_term_k = "<A-t>k Kill / Close Terminal Tab"
+let g:WhichKeyDesc_term_r = "<A-t>r Run All Tests"
+let g:WhichKeyDesc_term_c = "<A-t>c Run Test at Cursor"
+
+let g:WhichKeyDesc_term_t_alt = "<A-t><A-t>"
+let g:WhichKeyDesc_term_n_alt = "<A-t><A-n>"
+let g:WhichKeyDesc_term_f_alt = "<A-t><A-f>"
+let g:WhichKeyDesc_term_m_alt = "<A-t><A-m>"
+let g:WhichKeyDesc_term_s_alt = "<A-t><A-s>"
+let g:WhichKeyDesc_term_k_alt = "<A-t><A-k>"
+let g:WhichKeyDesc_term_r_alt = "<A-t><A-r>"
+let g:WhichKeyDesc_term_c_alt = "<A-t><A-c>"
+
+let g:WhichKeyDesc_rterm_t = "<A-Space>tt Toggle Terminal"
+let g:WhichKeyDesc_rterm_n = "<A-Space>tn New Terminal"
+let g:WhichKeyDesc_rterm_f = "<A-Space>tf Focus Terminal"
+let g:WhichKeyDesc_rterm_m = "<A-Space>tm Maximize Panel"
+let g:WhichKeyDesc_rterm_s = "<A-Space>ts Split Terminal"
+let g:WhichKeyDesc_rterm_k = "<A-Space>tk Kill / Close Terminal Tab"
+let g:WhichKeyDesc_rterm_r = "<A-Space>tr Run All Tests"
+let g:WhichKeyDesc_rterm_c = "<A-Space>tc Run Test at Cursor"
+
+map <A-t>t     <Action>(ActivateTerminalToolWindow)
+map <A-t><A-t> <Action>(ActivateTerminalToolWindow)
+map <A-t>n     <Action>(Terminal.NewTab)
+map <A-t><A-n> <Action>(Terminal.NewTab)
+map <A-t>f     <Action>(ActivateTerminalToolWindow)
+map <A-t><A-f> <Action>(ActivateTerminalToolWindow)
+map <A-t>m     <Action>(MaximizeToolWindow)
+map <A-t><A-m> <Action>(MaximizeToolWindow)
+map <A-t>s     <Action>(Terminal.SplitVertically)
+map <A-t><A-s> <Action>(Terminal.SplitVertically)
+map <A-t>k     <Action>(CloseActiveTab)
+map <A-t><A-k> <Action>(CloseActiveTab)
+map <A-t>r     <Action>(Run)
+map <A-t><A-r> <Action>(Run)
+map <A-t>c     <Action>(RunClass)
+map <A-t><A-c> <Action>(RunClass)
+
+map <A-Space>tt <Action>(ActivateTerminalToolWindow)
+map <A-Space>tn <Action>(Terminal.NewTab)
+map <A-Space>tf <Action>(ActivateTerminalToolWindow)
+map <A-Space>tm <Action>(MaximizeToolWindow)
+map <A-Space>ts <Action>(Terminal.SplitVertically)
+map <A-Space>tk <Action>(CloseActiveTab)
+map <A-Space>tr <Action>(Run)
+map <A-Space>tc <Action>(RunClass)
+
+" ----------------------------------------------------------------------------
+" 8.11 [u] +ui (Interfaccia, Temi, Layout)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_ui       = "<A-u> +ui"
+let g:WhichKeyDesc_root_ui  = "<A-Space>u +ui"
+let g:WhichKeyDesc_root_uia = "<A-Space><A-u>"
+
+let g:WhichKeyDesc_ui_c = "<A-u>c Colorscheme"
+let g:WhichKeyDesc_ui_w = "<A-u>w Toggle Word Wrap"
+let g:WhichKeyDesc_ui_m = "<A-u>m Toggle Breadcrumbs / Minimap"
+let g:WhichKeyDesc_ui_s = "<A-u>s Toggle Sticky Scroll / Whitespace"
+let g:WhichKeyDesc_ui_z = "<A-u>z Toggle Zen Mode"
+let g:WhichKeyDesc_ui_b = "<A-u>b Toggle Left Sidebar"
+let g:WhichKeyDesc_ui_r = "<A-u>r Toggle Right Sidebar"
+let g:WhichKeyDesc_ui_p = "<A-u>p Toggle Bottom Panel"
+let g:WhichKeyDesc_ui_f = "<A-u>f Toggle Full Screen"
+
+let g:WhichKeyDesc_ui_c_alt = "<A-u><A-c>"
+let g:WhichKeyDesc_ui_w_alt = "<A-u><A-w>"
+let g:WhichKeyDesc_ui_m_alt = "<A-u><A-m>"
+let g:WhichKeyDesc_ui_s_alt = "<A-u><A-s>"
+let g:WhichKeyDesc_ui_z_alt = "<A-u><A-z>"
+let g:WhichKeyDesc_ui_b_alt = "<A-u><A-b>"
+let g:WhichKeyDesc_ui_r_alt = "<A-u><A-r>"
+let g:WhichKeyDesc_ui_p_alt = "<A-u><A-p>"
+let g:WhichKeyDesc_ui_f_alt = "<A-u><A-f>"
+
+let g:WhichKeyDesc_rui_c = "<A-Space>uc Colorscheme"
+let g:WhichKeyDesc_rui_w = "<A-Space>uw Toggle Word Wrap"
+let g:WhichKeyDesc_rui_m = "<A-Space>um Toggle Breadcrumbs / Minimap"
+let g:WhichKeyDesc_rui_s = "<A-Space>us Toggle Sticky Scroll / Whitespace"
+let g:WhichKeyDesc_rui_z = "<A-Space>uz Toggle Zen Mode"
+let g:WhichKeyDesc_rui_b = "<A-Space>ub Toggle Left Sidebar"
+let g:WhichKeyDesc_rui_r = "<A-Space>ur Toggle Right Sidebar"
+let g:WhichKeyDesc_rui_p = "<A-Space>up Toggle Bottom Panel"
+let g:WhichKeyDesc_rui_f = "<A-Space>uf Toggle Full Screen"
+
+map <A-u>c     <Action>(QuickChangeScheme)
+map <A-u><A-c> <Action>(QuickChangeScheme)
+map <A-u>w     <Action>(EditorToggleUseSoftWraps)
+map <A-u><A-w> <Action>(EditorToggleUseSoftWraps)
+map <A-u>m     <Action>(EditorToggleShowBreadcrumbs)
+map <A-u><A-m> <Action>(EditorToggleShowBreadcrumbs)
+map <A-u>s     <Action>(EditorToggleShowWhitespaces)
+map <A-u><A-s> <Action>(EditorToggleShowWhitespaces)
+map <A-u>z     <Action>(ToggleZenMode)
+map <A-u><A-z> <Action>(ToggleZenMode)
+map <A-u>b     <Action>(HideAllWindows)
+map <A-u><A-b> <Action>(HideAllWindows)
+map <A-u>r     <Action>(HideSideWindows)
+map <A-u><A-r> <Action>(HideSideWindows)
+map <A-u>p     <Action>(HideActiveWindow)
+map <A-u><A-p> <Action>(HideActiveWindow)
+map <A-u>f     <Action>(ToggleFullScreen)
+map <A-u><A-f> <Action>(ToggleFullScreen)
+
+map <A-Space>uc <Action>(QuickChangeScheme)
+map <A-Space>uw <Action>(EditorToggleUseSoftWraps)
+map <A-Space>um <Action>(EditorToggleShowBreadcrumbs)
+map <A-Space>us <Action>(EditorToggleShowWhitespaces)
+map <A-Space>uz <Action>(ToggleZenMode)
+map <A-Space>ub <Action>(HideAllWindows)
+map <A-Space>ur <Action>(HideSideWindows)
+map <A-Space>up <Action>(HideActiveWindow)
+map <A-Space>uf <Action>(ToggleFullScreen)
+
+" ----------------------------------------------------------------------------
+" 8.12 [v] +views/sidebars (Tutte le Sidebar SX e DX / Tool Windows)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_views       = "<A-v> +views/sidebars"
+let g:WhichKeyDesc_root_views  = "<A-Space>v +views/sidebars"
+let g:WhichKeyDesc_root_viewsa = "<A-Space><A-v>"
+
+let g:WhichKeyDesc_view_e  = "<A-v>e Explorer (Project Files)"
+let g:WhichKeyDesc_view_s  = "<A-v>s Search (Find in Files)"
+let g:WhichKeyDesc_view_g  = "<A-v>g Git (Commit / Status)"
+let g:WhichKeyDesc_view_G  = "<A-v>G Git Log (Version Control)"
+let g:WhichKeyDesc_view_i  = "<A-v>i Git Inspect / Hierarchy"
+let g:WhichKeyDesc_view_p  = "<A-v>p Pull Requests & Merge Requests"
+let g:WhichKeyDesc_view_d  = "<A-v>d Run & Debug"
+let g:WhichKeyDesc_view_t  = "<A-v>t Testing / Run"
+let g:WhichKeyDesc_view_x  = "<A-v>x Extensions / Plugins"
+let g:WhichKeyDesc_view_a  = "<A-v>a Antigravity / Notifications"
+let g:WhichKeyDesc_view_c  = "<A-v>c Copilot / Chat"
+let g:WhichKeyDesc_view_m  = "<A-v>m Gemini Code Assist"
+let g:WhichKeyDesc_view_b  = "<A-v>b Database Client"
+let g:WhichKeyDesc_view_n  = "<A-v>n Database NoSQL / Services"
+let g:WhichKeyDesc_view_h  = "<A-v>h Database SQL History"
+let g:WhichKeyDesc_view_o  = "<A-v>o Oracle SQL Developer / DB"
+let g:WhichKeyDesc_view_D  = "<A-v>D Containers / Docker (Services)"
+let g:WhichKeyDesc_view_k  = "<A-v>k Kubernetes (Services)"
+let g:WhichKeyDesc_view_r  = "<A-v>r Remote Explorer (Services)"
+let g:WhichKeyDesc_view_S  = "<A-v>S Spring Boot / Services"
+let g:WhichKeyDesc_view_j  = "<A-v>j Gradle Projects"
+let g:WhichKeyDesc_view_y  = "<A-v>y Python Packages / Console"
+let g:WhichKeyDesc_view_J  = "<A-v>J Jupyter / Python Console"
+let g:WhichKeyDesc_view_l  = "<A-v>l Structure / LaTeX"
+let g:WhichKeyDesc_view_O  = "<A-v>O Bookmarks / Overleaf"
+let g:WhichKeyDesc_view_C  = "<A-v>C Maven / CMake"
+let g:WhichKeyDesc_view_M  = "<A-v>M TODO / Makefile"
+let g:WhichKeyDesc_view_L  = "<A-v>L Hierarchy / Live Share"
+let g:WhichKeyDesc_view_lb = "<A-v>[ Toggle Left Sidebar"
+let g:WhichKeyDesc_view_rb = "<A-v>] Toggle Right Sidebar"
+
+let g:WhichKeyDesc_view_e_alt  = "<A-v><A-e>"
+let g:WhichKeyDesc_view_s_alt  = "<A-v><A-s>"
+let g:WhichKeyDesc_view_g_alt  = "<A-v><A-g>"
+let g:WhichKeyDesc_view_G_alt  = "<A-v><A-S-g>"
+let g:WhichKeyDesc_view_i_alt  = "<A-v><A-i>"
+let g:WhichKeyDesc_view_p_alt  = "<A-v><A-p>"
+let g:WhichKeyDesc_view_d_alt  = "<A-v><A-d>"
+let g:WhichKeyDesc_view_t_alt  = "<A-v><A-t>"
+let g:WhichKeyDesc_view_x_alt  = "<A-v><A-x>"
+let g:WhichKeyDesc_view_a_alt  = "<A-v><A-a>"
+let g:WhichKeyDesc_view_c_alt  = "<A-v><A-c>"
+let g:WhichKeyDesc_view_m_alt  = "<A-v><A-m>"
+let g:WhichKeyDesc_view_b_alt  = "<A-v><A-b>"
+let g:WhichKeyDesc_view_n_alt  = "<A-v><A-n>"
+let g:WhichKeyDesc_view_h_alt  = "<A-v><A-h>"
+let g:WhichKeyDesc_view_o_alt  = "<A-v><A-o>"
+let g:WhichKeyDesc_view_D_alt  = "<A-v><A-S-d>"
+let g:WhichKeyDesc_view_k_alt  = "<A-v><A-k>"
+let g:WhichKeyDesc_view_r_alt  = "<A-v><A-r>"
+let g:WhichKeyDesc_view_S_alt  = "<A-v><A-S-s>"
+let g:WhichKeyDesc_view_j_alt  = "<A-v><A-j>"
+let g:WhichKeyDesc_view_y_alt  = "<A-v><A-y>"
+let g:WhichKeyDesc_view_J_alt  = "<A-v><A-S-j>"
+let g:WhichKeyDesc_view_l_alt  = "<A-v><A-l>"
+let g:WhichKeyDesc_view_O_alt  = "<A-v><A-S-o>"
+let g:WhichKeyDesc_view_C_alt  = "<A-v><A-S-c>"
+let g:WhichKeyDesc_view_M_alt  = "<A-v><A-S-m>"
+let g:WhichKeyDesc_view_L_alt  = "<A-v><A-S-l>"
+let g:WhichKeyDesc_view_lb_alt = "<A-v><A-[>"
+let g:WhichKeyDesc_view_rb_alt = "<A-v><A-]>"
+
+let g:WhichKeyDesc_rview_e  = "<A-Space>ve Explorer (Project Files)"
+let g:WhichKeyDesc_rview_s  = "<A-Space>vs Search (Find in Files)"
+let g:WhichKeyDesc_rview_g  = "<A-Space>vg Git (Commit / Status)"
+let g:WhichKeyDesc_rview_G  = "<A-Space>vG Git Log (Version Control)"
+let g:WhichKeyDesc_rview_i  = "<A-Space>vi Git Inspect / Hierarchy"
+let g:WhichKeyDesc_rview_p  = "<A-Space>vp Pull Requests & Merge Requests"
+let g:WhichKeyDesc_rview_d  = "<A-Space>vd Run & Debug"
+let g:WhichKeyDesc_rview_t  = "<A-Space>vt Testing / Run"
+let g:WhichKeyDesc_rview_x  = "<A-Space>vx Extensions / Plugins"
+let g:WhichKeyDesc_rview_a  = "<A-Space>va Antigravity / Notifications"
+let g:WhichKeyDesc_rview_c  = "<A-Space>vc Copilot / Chat"
+let g:WhichKeyDesc_rview_m  = "<A-Space>vm Gemini Code Assist"
+let g:WhichKeyDesc_rview_b  = "<A-Space>vb Database Client"
+let g:WhichKeyDesc_rview_n  = "<A-Space>vn Database NoSQL / Services"
+let g:WhichKeyDesc_rview_h  = "<A-Space>vh Database SQL History"
+let g:WhichKeyDesc_rview_o  = "<A-Space>vo Oracle SQL Developer / DB"
+let g:WhichKeyDesc_rview_D  = "<A-Space>vD Containers / Docker (Services)"
+let g:WhichKeyDesc_rview_k  = "<A-Space>vk Kubernetes (Services)"
+let g:WhichKeyDesc_rview_r  = "<A-Space>vr Remote Explorer (Services)"
+let g:WhichKeyDesc_rview_S  = "<A-Space>vS Spring Boot / Services"
+let g:WhichKeyDesc_rview_j  = "<A-Space>vj Gradle Projects"
+let g:WhichKeyDesc_rview_y  = "<A-Space>vy Python Packages / Console"
+let g:WhichKeyDesc_rview_J  = "<A-Space>vJ Jupyter / Python Console"
+let g:WhichKeyDesc_rview_l  = "<A-Space>vl Structure / LaTeX"
+let g:WhichKeyDesc_rview_O  = "<A-Space>vO Bookmarks / Overleaf"
+let g:WhichKeyDesc_rview_C  = "<A-Space>vC Maven / CMake"
+let g:WhichKeyDesc_rview_M  = "<A-Space>vM TODO / Makefile"
+let g:WhichKeyDesc_rview_L  = "<A-Space>vL Hierarchy / Live Share"
+let g:WhichKeyDesc_rview_lb = "<A-Space>v[ Toggle Left Sidebar"
+let g:WhichKeyDesc_rview_rb = "<A-Space>v] Toggle Right Sidebar"
+
+map <A-v>e       <Action>(ActivateProjectToolWindow)
+map <A-v><A-e>   <Action>(ActivateProjectToolWindow)
+map <A-v>s       <Action>(ActivateFindToolWindow)
+map <A-v><A-s>   <Action>(ActivateFindToolWindow)
+map <A-v>g       <Action>(ActivateCommitToolWindow)
+map <A-v><A-g>   <Action>(ActivateCommitToolWindow)
+map <A-v>G       <Action>(ActivateVersionControlToolWindow)
+map <A-v><A-S-g> <Action>(ActivateVersionControlToolWindow)
+map <A-v>i       <Action>(ActivateVersionControlToolWindow)
+map <A-v><A-i>   <Action>(ActivateVersionControlToolWindow)
+map <A-v>p       <Action>(ActivatePullRequestsToolWindow)
+map <A-v><A-p>   <Action>(ActivatePullRequestsToolWindow)
+map <A-v>d       <Action>(ActivateDebugToolWindow)
+map <A-v><A-d>   <Action>(ActivateDebugToolWindow)
+map <A-v>t       <Action>(ActivateRunToolWindow)
+map <A-v><A-t>   <Action>(ActivateRunToolWindow)
+map <A-v>x       <Action>(WelcomeScreen.Plugins)
+map <A-v><A-x>   <Action>(WelcomeScreen.Plugins)
+map <A-v>a       <Action>(ActivateNotificationsToolWindow)
+map <A-v><A-a>   <Action>(ActivateNotificationsToolWindow)
+map <A-v>c       <Action>(ActivateNotificationsToolWindow)
+map <A-v><A-c>   <Action>(ActivateNotificationsToolWindow)
+map <A-v>m       <Action>(ActivateNotificationsToolWindow)
+map <A-v><A-m>   <Action>(ActivateNotificationsToolWindow)
+map <A-v>b       <Action>(ActivateServicesToolWindow)
+map <A-v><A-b>   <Action>(ActivateServicesToolWindow)
+map <A-v>n       <Action>(ActivateServicesToolWindow)
+map <A-v><A-n>   <Action>(ActivateServicesToolWindow)
+map <A-v>h       <Action>(ActivateServicesToolWindow)
+map <A-v><A-h>   <Action>(ActivateServicesToolWindow)
+map <A-v>o       <Action>(ActivateServicesToolWindow)
+map <A-v><A-o>   <Action>(ActivateServicesToolWindow)
+map <A-v>D       <Action>(ActivateServicesToolWindow)
+map <A-v><A-S-d> <Action>(ActivateServicesToolWindow)
+map <A-v>k       <Action>(ActivateServicesToolWindow)
+map <A-v><A-k>   <Action>(ActivateServicesToolWindow)
+map <A-v>r       <Action>(ActivateServicesToolWindow)
+map <A-v><A-r>   <Action>(ActivateServicesToolWindow)
+map <A-v>S       <Action>(ActivateServicesToolWindow)
+map <A-v><A-S-s> <Action>(ActivateServicesToolWindow)
+map <A-v>j       <Action>(ActivateGradleToolWindow)
+map <A-v><A-j>   <Action>(ActivateGradleToolWindow)
+map <A-v>y       <Action>(ActivatePythonPackagesToolWindow)
+map <A-v><A-y>   <Action>(ActivatePythonPackagesToolWindow)
+map <A-v>J       <Action>(ActivatePythonConsoleToolWindow)
+map <A-v><A-S-j> <Action>(ActivatePythonConsoleToolWindow)
+map <A-v>l       <Action>(ActivateStructureToolWindow)
+map <A-v><A-l>   <Action>(ActivateStructureToolWindow)
+map <A-v>O       <Action>(ActivateBookmarksToolWindow)
+map <A-v><A-S-o> <Action>(ActivateBookmarksToolWindow)
+map <A-v>C       <Action>(ActivateMavenToolWindow)
+map <A-v><A-S-c> <Action>(ActivateMavenToolWindow)
+map <A-v>M       <Action>(ActivateTODOToolWindow)
+map <A-v><A-S-m> <Action>(ActivateTODOToolWindow)
+map <A-v>L       <Action>(ActivateHierarchyToolWindow)
+map <A-v><A-S-l> <Action>(ActivateHierarchyToolWindow)
+map <A-v>[       <Action>(HideAllWindows)
+map <A-v><A-[>   <Action>(HideAllWindows)
+map <A-v>]       <Action>(HideSideWindows)
+map <A-v><A-]>   <Action>(HideSideWindows)
+
+map <A-Space>ve <Action>(ActivateProjectToolWindow)
+map <A-Space>vs <Action>(ActivateFindToolWindow)
+map <A-Space>vg <Action>(ActivateCommitToolWindow)
+map <A-Space>vG <Action>(ActivateVersionControlToolWindow)
+map <A-Space>vi <Action>(ActivateVersionControlToolWindow)
+map <A-Space>vp <Action>(ActivatePullRequestsToolWindow)
+map <A-Space>vd <Action>(ActivateDebugToolWindow)
+map <A-Space>vt <Action>(ActivateRunToolWindow)
+map <A-Space>vx <Action>(WelcomeScreen.Plugins)
+map <A-Space>va <Action>(ActivateNotificationsToolWindow)
+map <A-Space>vc <Action>(ActivateNotificationsToolWindow)
+map <A-Space>vm <Action>(ActivateNotificationsToolWindow)
+map <A-Space>vb <Action>(ActivateServicesToolWindow)
+map <A-Space>vn <Action>(ActivateServicesToolWindow)
+map <A-Space>vh <Action>(ActivateServicesToolWindow)
+map <A-Space>vo <Action>(ActivateServicesToolWindow)
+map <A-Space>vD <Action>(ActivateServicesToolWindow)
+map <A-Space>vk <Action>(ActivateServicesToolWindow)
+map <A-Space>vr <Action>(ActivateServicesToolWindow)
+map <A-Space>vS <Action>(ActivateServicesToolWindow)
+map <A-Space>vj <Action>(ActivateGradleToolWindow)
+map <A-Space>vy <Action>(ActivatePythonPackagesToolWindow)
+map <A-Space>vJ <Action>(ActivatePythonConsoleToolWindow)
+map <A-Space>vl <Action>(ActivateStructureToolWindow)
+map <A-Space>vO <Action>(ActivateBookmarksToolWindow)
+map <A-Space>vC <Action>(ActivateMavenToolWindow)
+map <A-Space>vM <Action>(ActivateTODOToolWindow)
+map <A-Space>vL <Action>(ActivateHierarchyToolWindow)
+map <A-Space>v[ <Action>(HideAllWindows)
+map <A-Space>v] <Action>(HideSideWindows)
+
+" ----------------------------------------------------------------------------
+" 8.13 [w] +windows (Split e Finestre)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_windows       = "<A-w> +windows"
+let g:WhichKeyDesc_root_windows  = "<A-Space>w +windows"
+let g:WhichKeyDesc_root_windowsa = "<A-Space><A-w>"
+
+let g:WhichKeyDesc_win_w       = "<A-w>w Other Window"
+let g:WhichKeyDesc_win_d       = "<A-w>d Delete Window"
+let g:WhichKeyDesc_win_minus   = "<A-w>- Split Window Below"
+let g:WhichKeyDesc_win_s       = "<A-w>s Split Window Below"
+let g:WhichKeyDesc_win_bar     = "<A-w><Bar> Split Window Right"
+let g:WhichKeyDesc_win_bslash  = "<A-w>\\ Split Window Right"
+let g:WhichKeyDesc_win_v       = "<A-w>v Split Window Right"
+let g:WhichKeyDesc_win_m       = "<A-w>m Maximize Window Toggle"
+let g:WhichKeyDesc_win_eq      = "<A-w>= Balance Windows"
+let g:WhichKeyDesc_win_h       = "<A-w>h Go to Left Window"
+let g:WhichKeyDesc_win_j       = "<A-w>j Go to Lower Window"
+let g:WhichKeyDesc_win_k       = "<A-w>k Go to Upper Window"
+let g:WhichKeyDesc_win_l       = "<A-w>l Go to Right Window"
+
+let g:WhichKeyDesc_win_w_alt      = "<A-w><A-w>"
+let g:WhichKeyDesc_win_d_alt      = "<A-w><A-d>"
+let g:WhichKeyDesc_win_minus_alt  = "<A-w><A-->"
+let g:WhichKeyDesc_win_s_alt      = "<A-w><A-s>"
+let g:WhichKeyDesc_win_bslash_alt = "<A-w><A-\>"
+let g:WhichKeyDesc_win_v_alt      = "<A-w><A-v>"
+let g:WhichKeyDesc_win_m_alt      = "<A-w><A-m>"
+let g:WhichKeyDesc_win_eq_alt     = "<A-w><A-=>"
+let g:WhichKeyDesc_win_h_alt      = "<A-w><A-h>"
+let g:WhichKeyDesc_win_j_alt      = "<A-w><A-j>"
+let g:WhichKeyDesc_win_k_alt      = "<A-w><A-k>"
+let g:WhichKeyDesc_win_l_alt      = "<A-w><A-l>"
+
+let g:WhichKeyDesc_rwin_w      = "<A-Space>ww Other Window"
+let g:WhichKeyDesc_rwin_d      = "<A-Space>wd Delete Window"
+let g:WhichKeyDesc_rwin_minus  = "<A-Space>w- Split Window Below"
+let g:WhichKeyDesc_rwin_s      = "<A-Space>ws Split Window Below"
+let g:WhichKeyDesc_rwin_bar    = "<A-Space>w<Bar> Split Window Right"
+let g:WhichKeyDesc_rwin_bslash = "<A-Space>w\\ Split Window Right"
+let g:WhichKeyDesc_rwin_v      = "<A-Space>wv Split Window Right"
+let g:WhichKeyDesc_rwin_m      = "<A-Space>wm Maximize Window Toggle"
+let g:WhichKeyDesc_rwin_eq     = "<A-Space>w= Balance Windows"
+let g:WhichKeyDesc_rwin_h      = "<A-Space>wh Go to Left Window"
+let g:WhichKeyDesc_rwin_j      = "<A-Space>wj Go to Lower Window"
+let g:WhichKeyDesc_rwin_k      = "<A-Space>wk Go to Upper Window"
+let g:WhichKeyDesc_rwin_l      = "<A-Space>wl Go to Right Window"
+
+map <A-w>w       <Action>(NextSplitter)
+map <A-w><A-w>   <Action>(NextSplitter)
+map <A-w>d       <Action>(Unsplit)
+map <A-w><A-d>   <Action>(Unsplit)
+map <A-w>-       <Action>(SplitHorizontally)
+map <A-w><A-->   <Action>(SplitHorizontally)
+map <A-w>s       <Action>(SplitHorizontally)
+map <A-w><A-s>   <Action>(SplitHorizontally)
+map <A-w><Bar>   <Action>(SplitVertically)
+map <A-w>\       <Action>(SplitVertically)
+map <A-w><A-\>   <Action>(SplitVertically)
+map <A-w>v       <Action>(SplitVertically)
+map <A-w><A-v>   <Action>(SplitVertically)
+map <A-w>m       <Action>(HideAllWindows)
+map <A-w><A-m>   <Action>(HideAllWindows)
+map <A-w>=       <C-w>=
+map <A-w><A-=>   <C-w>=
+map <A-w>h       <C-w>h
+map <A-w><A-h>   <C-w>h
+map <A-w>j       <C-w>j
+map <A-w><A-j>   <C-w>j
+map <A-w>k       <C-w>k
+map <A-w><A-k>   <C-w>k
+map <A-w>l       <C-w>l
+map <A-w><A-l>   <C-w>l
+
+map <A-Space>ww     <Action>(NextSplitter)
+map <A-Space>wd     <Action>(Unsplit)
+map <A-Space>w-     <Action>(SplitHorizontally)
+map <A-Space>ws     <Action>(SplitHorizontally)
+map <A-Space>w<Bar> <Action>(SplitVertically)
+map <A-Space>w\     <Action>(SplitVertically)
+map <A-Space>wv     <Action>(SplitVertically)
+map <A-Space>wm     <Action>(HideAllWindows)
+map <A-Space>w=     <C-w>=
+map <A-Space>wh     <C-w>h
+map <A-Space>wj     <C-w>j
+map <A-Space>wk     <C-w>k
+map <A-Space>wl     <C-w>l
+
+" ----------------------------------------------------------------------------
+" 8.14 [x] +diagnostics/quickfix (Errori & Problemi)
+" ----------------------------------------------------------------------------
+let g:WhichKeyDesc_diag       = "<A-x> +diagnostics/quickfix"
+let g:WhichKeyDesc_root_diag  = "<A-Space>x +diagnostics/quickfix"
+let g:WhichKeyDesc_root_diaga = "<A-Space><A-x>"
+
+let g:WhichKeyDesc_diag_x = "<A-x>x Diagnostics (Problems Panel)"
+let g:WhichKeyDesc_diag_j = "<A-x>j Next Diagnostic"
+let g:WhichKeyDesc_diag_k = "<A-x>k Prev Diagnostic"
+let g:WhichKeyDesc_diag_n = "<A-x>n Next Diagnostic in File"
+let g:WhichKeyDesc_diag_p = "<A-x>p Prev Diagnostic in File"
+let g:WhichKeyDesc_diag_o = "<A-x>o Output Panel"
+
+let g:WhichKeyDesc_diag_x_alt = "<A-x><A-x>"
+let g:WhichKeyDesc_diag_j_alt = "<A-x><A-j>"
+let g:WhichKeyDesc_diag_k_alt = "<A-x><A-k>"
+let g:WhichKeyDesc_diag_n_alt = "<A-x><A-n>"
+let g:WhichKeyDesc_diag_p_alt = "<A-x><A-p>"
+let g:WhichKeyDesc_diag_o_alt = "<A-x><A-o>"
+
+let g:WhichKeyDesc_rdiag_x = "<A-Space>xx Diagnostics (Problems Panel)"
+let g:WhichKeyDesc_rdiag_j = "<A-Space>xj Next Diagnostic"
+let g:WhichKeyDesc_rdiag_k = "<A-Space>xk Prev Diagnostic"
+let g:WhichKeyDesc_rdiag_n = "<A-Space>xn Next Diagnostic in File"
+let g:WhichKeyDesc_rdiag_p = "<A-Space>xp Prev Diagnostic in File"
+let g:WhichKeyDesc_rdiag_o = "<A-Space>xo Output Panel"
+
+map <A-x>x     <Action>(ActivateProblemsViewToolWindow)
+map <A-x><A-x> <Action>(ActivateProblemsViewToolWindow)
+map <A-x>j     <Action>(GotoNextError)
+map <A-x><A-j> <Action>(GotoNextError)
+map <A-x>k     <Action>(GotoPreviousError)
+map <A-x><A-k> <Action>(GotoPreviousError)
+map <A-x>n     <Action>(GotoNextError)
+map <A-x><A-n> <Action>(GotoNextError)
+map <A-x>p     <Action>(GotoPreviousError)
+map <A-x><A-p> <Action>(GotoPreviousError)
+map <A-x>o     <Action>(ActivateRunToolWindow)
+map <A-x><A-o> <Action>(ActivateRunToolWindow)
+
+map <A-Space>xx <Action>(ActivateProblemsViewToolWindow)
+map <A-Space>xj <Action>(GotoNextError)
+map <A-Space>xk <Action>(GotoPreviousError)
+map <A-Space>xn <Action>(GotoNextError)
+map <A-Space>xp <Action>(GotoPreviousError)
+map <A-Space>xo <Action>(ActivateRunToolWindow)

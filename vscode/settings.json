@@ -303,7 +303,7 @@
       "name": "Explorer",
       "icon": "files",
       "type": "command",
-      "command": "workbench.action.toggleSidebarVisibility"
+      "command": "workbench.view.explorer"
     },
     {
       "key": "E",
