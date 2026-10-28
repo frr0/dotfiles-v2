@@ -2,4 +2,6 @@
 polkit_agent = true
 
 [lockscreen]
+enabled = true
+lock_before_suspend = true
 wallpaper = "/home/francesco/Scaricati/photo_2025-10-09_13-14-36.jpg"

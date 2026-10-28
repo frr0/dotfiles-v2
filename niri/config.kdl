@@ -33,7 +33,6 @@ binds {
     Mod+Shift+Up    { move-workspace-to-monitor-up; }
     Mod+Shift+Down  { move-workspace-to-monitor-down; }
     Mod+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
-    Mod+Shift+L hotkey-overlay-title="Lock Screen: swaylock" { spawn "swaylock" "-f"; }
 }
 
 layout {
@@ -46,4 +45,4 @@ layout {
 
 }
 
-spawn-at-startup "swayidle"
+spawn-at-startup "swayidle" "-w"

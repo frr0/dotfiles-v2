@@ -25,4 +25,5 @@ input {
 
     focus-follows-mouse // Automatically focus windows under the mouse pointer
     workspace-auto-back-and-forth // Enable workspace back & forth switching
+    disable-power-key-handling // Prevent niri from re-suspending immediately when waking with the Power button
 }

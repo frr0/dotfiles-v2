@@ -127,6 +127,35 @@ if command -v fzf >/dev/null 2>&1; then
     }
 fi
 
+# yt-dlp (media downloader)
+if command -v yt-dlp >/dev/null 2>&1; then
+    alias ytdl='yt-dlp'
+    alias yta='yt-dlp -x --audio-format mp3'
+    alias ytv='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
+fi
+
+# podman (rootless containers)
+if command -v podman >/dev/null 2>&1; then
+    alias pd='podman'
+    alias pps='podman ps'
+    alias ppa='podman ps -a'
+    alias pim='podman images'
+fi
+
+# tailscale (mesh VPN)
+if command -v tailscale >/dev/null 2>&1; then
+    alias ts='tailscale'
+    alias tss='tailscale status'
+    alias tsu='sudo tailscale up'
+    alias tsd='sudo tailscale down'
+fi
+
+# Antigravity CLI (agy)
+if command -v agy >/dev/null 2>&1; then
+    alias agyc='agy -c'
+    alias agyd='agy -d'
+fi
+
 # General utilities
 alias c='clear'
 alias q='exit'
@@ -159,7 +188,6 @@ alias vc='nvim ~/.vimrc'
 alias niric='nvim ~/.config/niri/config.kdl'
 alias nocc='nvim ~/.config/noctalia/config.toml'
 alias idlec='nvim ~/.config/swayidle/config'
-alias lockc='nvim ~/.config/swaylock/config'
 alias vsc='nvim ~/.config/Code/User/settings.json'
 alias vsk='nvim ~/.config/Code/User/keybindings.json'
 
@@ -267,4 +295,9 @@ else
     }
     autoload -Uz add-zsh-hook
     add-zsh-hook precmd _fallback_prompt_precmd
+fi
+
+# zoxide (smart directory jumper: z & zi)
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
 fi

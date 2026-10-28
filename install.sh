@@ -43,11 +43,14 @@ Managed Software:
   • tmux                   - Terminal multiplexer
   • alacritty              - GPU-accelerated terminal emulator
   • lazygit, lazydocker    - Terminal UIs for Git & Docker
+  • podman                 - Rootless container engine
   • starship               - Cross-shell prompt
   • zsh                    - Z shell (+ autosuggestions, syntax-highlighting, substring-search)
   • niri, noctalia         - Scrollable-tiling Wayland compositor & desktop shell
-  • swayidle, swaylock     - Idle daemon (screensaver/DPMS/suspend) & screen locker
-  • fzf, eza, bat, fd, rg  - Modern CLI utilities (ugrep, plocate, htop, ranger, wl-clipboard)
+  • swayidle               - Idle daemon (screensaver/DPMS/suspend)
+  • zoxide, fzf, eza, bat  - Modern CLI utilities (fd, rg, ugrep, plocate, htop, ranger, yt-dlp, wl-clipboard)
+  • tailscale, bitwarden   - Mesh VPN & password manager
+  • agy                    - Google Antigravity CLI
 
 Managed Dotfiles:
   • .zshrc                 -> ~/.zshrc
@@ -63,7 +66,6 @@ Managed Dotfiles:
   • niri/*                 -> ~/.config/niri/{config.kdl,cfg/*.kdl}
   • noctalia/*             -> ~/.config/noctalia/config.toml & ~/.local/state/noctalia/settings.toml
   • swayidle/config        -> ~/.config/swayidle/config
-  • swaylock/config        -> ~/.config/swaylock/config
 
 Any existing files are safely backed up to ~/.dotfiles_backup/<timestamp>/
 before symlinks are created.
@@ -162,7 +164,11 @@ install_pacman() {
         plocate
         ugrep
         swayidle
-        swaylock
+        zoxide
+        podman
+        tailscale
+        yt-dlp
+        bitwarden
     )
 
     local missing=()
@@ -223,6 +229,9 @@ install_apt() {
         xclip
         zsh-autosuggestions
         zsh-syntax-highlighting
+        zoxide
+        podman
+        yt-dlp
     )
 
     local missing=()
@@ -331,6 +340,10 @@ install_dnf() {
         git
         zsh-autosuggestions
         zsh-syntax-highlighting
+        zoxide
+        podman
+        tailscale
+        yt-dlp
     )
 
     local missing=()
@@ -418,6 +431,10 @@ install_brew() {
         ranger
         zsh-autosuggestions
         zsh-syntax-highlighting
+        zoxide
+        podman
+        tailscale
+        yt-dlp
     )
 
     local missing=()
@@ -461,7 +478,39 @@ install_brew() {
 install_generic() {
     echo -e "  ${YELLOW}Could not determine supported package manager (pacman, apt, dnf, brew).${NC}"
     echo -e "  Please ensure the following tools are installed manually:"
-    echo -e "    vim, neovim, tmux, lazygit, starship, zsh, fzf, eza, htop, ranger, wl-clipboard"
+    echo -e "    vim, neovim, tmux, lazygit, starship, zsh, zoxide, fzf, eza, htop, ranger, podman, tailscale, yt-dlp, bitwarden, wl-clipboard"
+}
+
+install_agy() {
+    if command -v agy >/dev/null 2>&1 || [ -x "${HOME}/.local/bin/agy" ]; then
+        echo -e "  ${GREEN}✓ Antigravity CLI (agy) is already installed.${NC}"
+        return 0
+    fi
+
+    echo -e "  ${YELLOW}Missing tool:${NC} agy (Google Antigravity CLI)"
+    if [ "$DRY_RUN" = true ]; then
+        echo -e "  ${CYAN}[DRY-RUN] Would run:${NC} curl -fsSL https://antigravity.google/cli/install.sh | bash"
+        return 0
+    fi
+
+    if [ "$ASSUME_YES" = false ]; then
+        if [ -t 0 ]; then
+            read -r -p "Install Antigravity CLI (agy)? [Y/n] " answer
+            case "$answer" in
+                [nN][oO]|[nN])
+                    echo -e "  ${YELLOW}Skipping agy installation.${NC}"
+                    return 0
+                    ;;
+            esac
+        else
+            echo -e "  ${YELLOW}Non-interactive shell; use -y/--yes to install agy automatically.${NC}"
+            return 0
+        fi
+    fi
+
+    echo -e "  ${BLUE}Installing Antigravity CLI (agy)...${NC}"
+    curl -fsSL https://antigravity.google/cli/install.sh | bash
+    echo -e "  ${GREEN}✓ Antigravity CLI installation complete!${NC}"
 }
 
 install_packages() {
@@ -487,6 +536,7 @@ install_packages() {
             install_generic
             ;;
     esac
+    install_agy
     echo ""
 }
 
@@ -545,9 +595,8 @@ LINKS=(
     "noctalia/config.toml:${HOME}/.config/noctalia/config.toml"
     "noctalia/settings.toml:${HOME}/.local/state/noctalia/settings.toml"
 
-    # Screensaver / Idle & Lockscreen
+    # Screensaver / Idle
     "swayidle/config:${HOME}/.config/swayidle/config"
-    "swaylock/config:${HOME}/.config/swaylock/config"
 )
 
 backup_made=false
@@ -711,5 +760,5 @@ if [ "$backup_made" = true ]; then
     echo -e "${YELLOW}Backups saved in:${NC} ${BACKUP_DIR}"
 fi
 echo -e "${GREEN}Done! Installation process finished.${NC}"
-echo -e "${CYAN}Tip:${NC} Any changes made to your linked config files (zsh, tmux, vim, nvim, vscode, niri, noctalia, swayidle, swaylock) are directly reflected in this repository."
+echo -e "${CYAN}Tip:${NC} Any changes made to your linked config files (zsh, tmux, vim, nvim, vscode, niri, noctalia, swayidle) are directly reflected in this repository."
 echo -e "     To push updates, just run: ${BLUE}dot && git commit -am '...' && git push${NC}"

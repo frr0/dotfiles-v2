@@ -14,6 +14,10 @@ command -v ugrep >/dev/null 2>&1 && alias ug='ug -Q'
 command -v plocate >/dev/null 2>&1 && alias locate='plocate'
 command -v htop >/dev/null 2>&1 && alias top='htop'
 command -v fzf >/dev/null 2>&1 && alias fz='fzf'
+command -v yt-dlp >/dev/null 2>&1 && alias ytdl='yt-dlp'
+command -v podman >/dev/null 2>&1 && alias pd='podman'
+command -v tailscale >/dev/null 2>&1 && alias ts='tailscale'
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash)"
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 else

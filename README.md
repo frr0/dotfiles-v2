@@ -25,9 +25,8 @@ Clean, version-controlled dotfiles for personal development environment, desktop
 | [`niri/config.kdl`](file:///home/francesco/Progetti/dotfiles/niri/config.kdl) & [`niri/cfg/`](file:///home/francesco/Progetti/dotfiles/niri/cfg) | `~/.config/niri/` | Niri scrollable-tiling Wayland compositor config (dual-monitor, borders, keybinds, startup) |
 | [`noctalia/config.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/config.toml) | `~/.config/noctalia/config.toml` | Noctalia shell core config (polkit agent & lockscreen wallpaper) |
 | [`noctalia/settings.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/settings.toml) | `~/.local/state/noctalia/settings.toml` | Noctalia UI state/settings (bar, dock, Gruvbox/Ayu Blue theme, lockscreen widgets, monitors) |
-| [`swayidle/config`](file:///home/francesco/Progetti/dotfiles/swayidle/config) | `~/.config/swayidle/config` | Screensaver / idle daemon config (300s monitor power-off + lock, 600s suspend, before-sleep lock) |
-| [`swaylock/config`](file:///home/francesco/Progetti/dotfiles/swaylock/config) | `~/.config/swaylock/config` | Swaylock screen locker config (wallpaper, scaling & background color) |
-| [`wallpapers/`](file:///home/francesco/Progetti/dotfiles/wallpapers) | `~/Scaricati/photo_2025-10-09_13-14-36.jpg` | Backup of desktop & lockscreen wallpaper image |
+| [`swayidle/config`](file:///home/francesco/Progetti/dotfiles/swayidle/config) | `~/.config/swayidle/config` | Screensaver / idle daemon config (300s monitor power-off, 600s suspend) |
+| [`wallpapers/`](file:///home/francesco/Progetti/dotfiles/wallpapers) | `~/Scaricati/photo_2025-10-09_13-14-36.jpg` | Backup of desktop wallpaper image |
 
 ---
 
@@ -39,10 +38,12 @@ The installation script detects your package manager (`pacman`, `apt`, `dnf`, `b
 | :--- | :--- |
 | **Editors & IDE** | `vim`, `neovim` (`nvim`), `visual-studio-code-bin` (`code`) |
 | **Multiplexer, Terminal & Shell** | `tmux`, `alacritty`, `zsh` |
-| **Wayland Desktop & Screensaver** | `niri`, `noctalia`, `swayidle`, `swaylock` |
-| **Git & Container UIs** | `lazygit`, `lazydocker` |
+| **Wayland Desktop & Screensaver** | `niri`, `noctalia`, `swayidle` |
+| **Git & Container Tools** | `lazygit`, `lazydocker`, `podman` |
+| **AI & Agent CLI** | `agy` (Google Antigravity CLI) |
 | **Prompt** | `starship` |
-| **CLI Utilities** | `fzf` (fuzzy finder), `eza` (modern `ls`), `bat` (modern `cat`), `fd` (modern `find`), `ripgrep` / `ugrep` (fast grep), `plocate` (fast locate), `htop` (process viewer), `ranger` (file manager) |
+| **CLI Utilities** | `zoxide` (smart `z`/`zi` directory jumper), `fzf` (fuzzy finder), `eza` (modern `ls`), `bat` (modern `cat`), `fd` (modern `find`), `ripgrep` / `ugrep` (fast grep), `plocate` (fast locate), `htop` (process viewer), `ranger` (file manager), `yt-dlp` (`ytdl` media downloader) |
+| **Network & Security** | `tailscale` (mesh VPN), `bitwarden` (password manager) |
 | **Clipboard** | `wl-clipboard` (Wayland) / `xclip` (X11) |
 | **Zsh Plugins** | `zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-history-substring-search` |
 
@@ -72,14 +73,13 @@ All configuration files in your home directory are **symbolic links** pointing t
 ~/.config/noctalia/config.toml       ───────────► ~/Progetti/dotfiles/noctalia/config.toml
 ~/.local/state/noctalia/settings.toml───────────► ~/Progetti/dotfiles/noctalia/settings.toml
 ~/.config/swayidle/config            ───────────► ~/Progetti/dotfiles/swayidle/config
-~/.config/swaylock/config            ───────────► ~/Progetti/dotfiles/swaylock/config
 ```
 
 Because editors follow symlinks when saving, **any modification you make to your active config files is immediately saved directly into this repository folder**.
 
 ### Daily Workflow
 
-1. Edit your dotfile normally (e.g. `zc`, `tc`, `vc`, `niric`, `nocc`, `idlec`, `lockc`, `vsc`, `vsk`).
+1. Edit your dotfile normally (e.g. `zc`, `tc`, `vc`, `niric`, `nocc`, `idlec`, `vsc`, `vsk`).
 2. Go to the repository directory using your built-in alias:
    ```bash
    dot

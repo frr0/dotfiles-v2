@@ -158,5 +158,7 @@ binds {
     // ─── Exit / Power ───
     CTRL+ALT+Delete                     { quit; } // Also quits Niri
     Mod+Shift+P                         { power-off-monitors; } // Turn off screens (useful for OLED or privacy)
+    Mod+Shift+Z                         hotkey-overlay-title="Lock & Turn Off Screens (Instant Wake)" { spawn-sh "noctalia msg session lock && sleep 0.3 && niri msg action power-off-monitors"; }
+    XF86Sleep                           allow-when-locked=true { spawn-sh "noctalia msg session lock-and-suspend"; }
     Mod+O                               repeat=false { toggle-overview; }
 }

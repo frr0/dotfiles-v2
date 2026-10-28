@@ -1,3 +1,4 @@
-timeout 300 'sh -c "niri msg action power-off-monitors; swaylock -f -i /home/francesco/Scaricati/photo_2025-10-09_13-14-36.jpg -s fill -c 000000"' resume 'niri msg action power-on-monitors'
-timeout 600 'systemctl suspend'
-before-sleep 'swaylock -f -i /home/francesco/Scaricati/photo_2025-10-09_13-14-36.jpg -s fill -c 000000'
+timeout 300 'sh -c "noctalia msg session lock && sleep 0.5 && niri msg action power-off-monitors"' resume 'niri msg action power-on-monitors'
+timeout 1800 'systemctl suspend'
+before-sleep 'noctalia msg session lock'
+after-resume 'niri msg action power-on-monitors'
