@@ -26,6 +26,8 @@ Clean, version-controlled dotfiles for personal development environment, desktop
 | [`noctalia/config.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/config.toml) | `~/.config/noctalia/config.toml` | Noctalia shell core config (polkit agent & lockscreen wallpaper) |
 | [`noctalia/settings.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/settings.toml) | `~/.local/state/noctalia/settings.toml` | Noctalia UI state/settings (bar, dock, Gruvbox/Ayu Blue theme, lockscreen widgets, monitors) |
 | [`swayidle/config`](file:///home/francesco/Progetti/dotfiles/swayidle/config) | `~/.config/swayidle/config` | Screensaver / idle daemon config (300s monitor power-off, 600s suspend) |
+| [`agents/mcp_config.json`](file:///home/francesco/Progetti/dotfiles/agents/mcp_config.json) | `~/.gemini/config/mcp_config.json` | MCP Servers configuration (playwright, memory, fetch, github, sqlite, context7, sequential-thinking, rea) |
+| [`agents/skills/`](file:///home/francesco/Progetti/dotfiles/agents/skills) | `~/.agents/skills/` & `~/.gemini/skills/` | AI Agent Skills (tdd-workflow, clean-git, code-reviewer, team-lead, agent-orchestrator) |
 | [`wallpapers/`](file:///home/francesco/Progetti/dotfiles/wallpapers) | `~/Scaricati/photo_2025-10-09_13-14-36.jpg` | Backup of desktop wallpaper image |
 
 ---
@@ -73,6 +75,8 @@ All configuration files in your home directory are **symbolic links** pointing t
 ~/.config/noctalia/config.toml       ───────────► ~/Progetti/dotfiles/noctalia/config.toml
 ~/.local/state/noctalia/settings.toml───────────► ~/Progetti/dotfiles/noctalia/settings.toml
 ~/.config/swayidle/config            ───────────► ~/Progetti/dotfiles/swayidle/config
+~/.gemini/config/mcp_config.json     ───────────► ~/Progetti/dotfiles/agents/mcp_config.json
+~/.agents/skills/*                   ───────────► ~/Progetti/dotfiles/agents/skills/*
 ```
 
 Because editors follow symlinks when saving, **any modification you make to your active config files is immediately saved directly into this repository folder**.

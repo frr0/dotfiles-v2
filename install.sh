@@ -597,6 +597,20 @@ LINKS=(
 
     # Screensaver / Idle
     "swayidle/config:${HOME}/.config/swayidle/config"
+
+    # AI Agents & Antigravity (MCP Servers & Skills)
+    "agents/mcp_config.json:${HOME}/.gemini/config/mcp_config.json"
+    "agents/mcp_config.json:${HOME}/.agents/mcp_config.json"
+    "agents/skills/tdd-workflow/SKILL.md:${HOME}/.gemini/skills/tdd-workflow/SKILL.md"
+    "agents/skills/clean-git/SKILL.md:${HOME}/.gemini/skills/clean-git/SKILL.md"
+    "agents/skills/code-reviewer/SKILL.md:${HOME}/.gemini/skills/code-reviewer/SKILL.md"
+    "agents/skills/team-lead/SKILL.md:${HOME}/.gemini/skills/team-lead/SKILL.md"
+    "agents/skills/agent-orchestrator/SKILL.md:${HOME}/.gemini/skills/agent-orchestrator/SKILL.md"
+    "agents/skills/tdd-workflow/SKILL.md:${HOME}/.agents/skills/tdd-workflow/SKILL.md"
+    "agents/skills/clean-git/SKILL.md:${HOME}/.agents/skills/clean-git/SKILL.md"
+    "agents/skills/code-reviewer/SKILL.md:${HOME}/.agents/skills/code-reviewer/SKILL.md"
+    "agents/skills/team-lead/SKILL.md:${HOME}/.agents/skills/team-lead/SKILL.md"
+    "agents/skills/agent-orchestrator/SKILL.md:${HOME}/.agents/skills/agent-orchestrator/SKILL.md"
 )
 
 backup_made=false

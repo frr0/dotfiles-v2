@@ -1544,7 +1544,7 @@
       ]
     }
   ],
-  "files.autoSave": "afterDelay",
+  "files.autoSave": "off",
   "files.autoSaveDelay": 1,
   "editor.overtypeCursorStyle": "line",
   "github.copilot.nextEditSuggestions.enabled": true,
