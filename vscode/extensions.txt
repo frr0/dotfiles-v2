@@ -13,9 +13,9 @@ funkyremi.vscode-google-translate
 github.codespaces
 github.remotehub
 github.vscode-pull-request-github
+googlecloudtools.datacloud
 google.geminicodeassist
 google.google-antigravity
-googlecloudtools.datacloud
 iamhyc.overleaf-workshop
 james-yu.latex-workshop
 kdarkhan.mips
@@ -42,10 +42,6 @@ ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-powertoys
 ms-toolsai.vscode-jupyter-slideshow
-ms-vscode-remote.remote-containers
-ms-vscode-remote.remote-ssh
-ms-vscode-remote.remote-ssh-edit
-ms-vscode-remote.remote-wsl
 ms-vscode.azure-repos
 ms-vscode.cmake-tools
 ms-vscode.cpp-devtools
@@ -57,6 +53,10 @@ ms-vscode.live-server
 ms-vscode.makefile-tools
 ms-vscode.powershell
 ms-vscode.remote-explorer
+ms-vscode-remote.remote-containers
+ms-vscode-remote.remote-ssh
+ms-vscode-remote.remote-ssh-edit
+ms-vscode-remote.remote-wsl
 ms-vscode.remote-repositories
 ms-vscode.vscode-github-issue-notebooks
 ms-vscode.vscode-serial-monitor
@@ -68,6 +68,7 @@ phplasma.csv-to-table
 redhat.java
 redhat.vscode-yaml
 rikkarth.ship-at-sea
+rust-lang.rust-analyzer
 slightc.pip-manager
 tianyishi.rmarkdown
 tomoki1207.pdf

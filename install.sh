@@ -169,6 +169,7 @@ install_pacman() {
         tailscale
         yt-dlp
         bitwarden
+        syncthing
     )
 
     local missing=()
@@ -232,6 +233,7 @@ install_apt() {
         zoxide
         podman
         yt-dlp
+        syncthing
     )
 
     local missing=()
@@ -706,6 +708,49 @@ create_symlinks() {
             mkdir -p "$(dirname "$wp_dest")"
             cp -a "$wp_src" "$wp_dest"
             echo -e "  ${GREEN}✓ Restored wallpaper:${NC} ${wp_dest}"
+        fi
+    fi
+
+    # Syncthing configuration (template copy with automatic secret API key generation)
+    local st_src="${DOTFILES_DIR}/syncthing/config.xml"
+    local st_dest="${HOME}/.local/state/syncthing/config.xml"
+    if [ -f "$st_src" ]; then
+        if [ -f "$st_dest" ]; then
+            echo -e "  ${GREEN}✓ Syncthing configuration already active (secrets preserved):${NC} ${st_dest}"
+        else
+            if [ "$DRY_RUN" = true ]; then
+                echo -e "  ${CYAN}[DRY-RUN] Would initialize Syncthing config with generated API key at: ${st_dest}${NC}"
+            else
+                mkdir -p "$(dirname "$st_dest")"
+                local new_apikey
+                if command -v openssl >/dev/null 2>&1; then
+                    new_apikey="$(openssl rand -hex 16)"
+                else
+                    new_apikey="$(python3 -c 'import secrets; print(secrets.token_hex(16))' 2>/dev/null || echo "sync_$(date +%s)")"
+                fi
+                sed "s/GENERATE_OR_INSERT_SECRET_APIKEY_HERE/${new_apikey}/g" "$st_src" > "$st_dest"
+                chmod 600 "$st_dest"
+                echo -e "  ${GREEN}✓ Initialized Syncthing config with unique API key:${NC} ${st_dest}"
+            fi
+        fi
+    fi
+
+    # Antigravity CLI native settings template (~/.gemini/settings.json)
+    local agy_example="${DOTFILES_DIR}/agents/settings.json.example"
+    local agy_dest="${HOME}/.gemini/settings.json"
+    if [ -f "$agy_example" ]; then
+        if [ -f "$agy_dest" ]; then
+            echo -e "  ${GREEN}✓ Antigravity native settings already active (tokens preserved):${NC} ${agy_dest}"
+        else
+            if [ "$DRY_RUN" = true ]; then
+                echo -e "  ${CYAN}[DRY-RUN] Would create template Antigravity settings at: ${agy_dest}${NC}"
+            else
+                mkdir -p "$(dirname "$agy_dest")"
+                cp "$agy_example" "$agy_dest"
+                chmod 600 "$agy_dest"
+                echo -e "  ${GREEN}✓ Created Antigravity settings template:${NC} ${agy_dest}"
+                echo -e "    ${YELLOW}→ Remember to edit ${agy_dest} to insert your personal GitHub/Obsidian tokens.${NC}"
+            fi
         fi
     fi
     echo ""

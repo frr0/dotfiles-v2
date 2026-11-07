@@ -26,8 +26,10 @@ Clean, version-controlled dotfiles for personal development environment, desktop
 | [`noctalia/config.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/config.toml) | `~/.config/noctalia/config.toml` | Noctalia shell core config (polkit agent & lockscreen wallpaper) |
 | [`noctalia/settings.toml`](file:///home/francesco/Progetti/dotfiles/noctalia/settings.toml) | `~/.local/state/noctalia/settings.toml` | Noctalia UI state/settings (bar, dock, Gruvbox/Ayu Blue theme, lockscreen widgets, monitors) |
 | [`swayidle/config`](file:///home/francesco/Progetti/dotfiles/swayidle/config) | `~/.config/swayidle/config` | Screensaver / idle daemon config (300s monitor power-off, 600s suspend) |
-| [`agents/mcp_config.json`](file:///home/francesco/Progetti/dotfiles/agents/mcp_config.json) | `~/.gemini/config/mcp_config.json` | MCP Servers configuration (playwright, memory, fetch, github, sqlite, context7, sequential-thinking, rea) |
+| [`agents/mcp_config.json`](file:///home/francesco/Progetti/dotfiles/agents/mcp_config.json) | `~/.gemini/config/mcp_config.json` | MCP Servers configuration (playwright, memory, fetch, github, docker, obsidian, sqlite, context7, sequential-thinking, rea) |
+| [`agents/settings.json.example`](file:///home/francesco/Progetti/dotfiles/agents/settings.json.example) | `~/.gemini/settings.json` | Antigravity CLI native settings & MCP template (with secret placeholders) |
 | [`agents/skills/`](file:///home/francesco/Progetti/dotfiles/agents/skills) | `~/.agents/skills/` & `~/.gemini/skills/` | AI Agent Skills (tdd-workflow, clean-git, code-reviewer, team-lead, agent-orchestrator) |
+| [`syncthing/config.xml`](file:///home/francesco/Progetti/dotfiles/syncthing/config.xml) | `~/.local/state/syncthing/config.xml` | Syncthing decentralized P2P synchronization config (Obsidian Vault sync, redacted secrets) |
 | [`wallpapers/`](file:///home/francesco/Progetti/dotfiles/wallpapers) | `~/Scaricati/photo_2025-10-09_13-14-36.jpg` | Backup of desktop wallpaper image |
 
 ---
@@ -46,6 +48,7 @@ The installation script detects your package manager (`pacman`, `apt`, `dnf`, `b
 | **Prompt** | `starship` |
 | **CLI Utilities** | `zoxide` (smart `z`/`zi` directory jumper), `fzf` (fuzzy finder), `eza` (modern `ls`), `bat` (modern `cat`), `fd` (modern `find`), `ripgrep` / `ugrep` (fast grep), `plocate` (fast locate), `htop` (process viewer), `ranger` (file manager), `yt-dlp` (`ytdl` media downloader) |
 | **Network & Security** | `tailscale` (mesh VPN), `bitwarden` (password manager) |
+| **Synchronization** | `syncthing` (decentralized multi-device file sync) |
 | **Clipboard** | `wl-clipboard` (Wayland) / `xclip` (X11) |
 | **Zsh Plugins** | `zsh-autosuggestions`, `zsh-syntax-highlighting`, `zsh-history-substring-search` |
 
@@ -96,6 +99,21 @@ Because editors follow symlinks when saving, **any modification you make to your
    git commit -am "Update configurations"
    git push
    ```
+
+---
+
+## Security & Secrets Management
+
+To ensure security, sensitive tokens, certificates, and passwords are separated from Git tracking:
+
+### 1. Antigravity & AI Agent Tokens
+- **GitHub PAT & Obsidian REST API Tokens**: MCP configurations in the repository (`agents/mcp_config.json` and `agents/settings.json.example`) contain safe placeholders (`INSERISCI_QUI_IL_TUO_TOKEN_GITHUB_GRATUITO` and `Bearer INSERISCI_QUI_IL_TUO_TOKEN_OBSIDIAN`).
+- **Active Credentials**: Antigravity loads active credentials from `~/.gemini/settings.json` and OAuth tokens from `~/.gemini/oauth_creds.json`, both excluded from Git tracking via `.gitignore`.
+
+### 2. Syncthing Secrets & Keys
+- **TLS Certificates & Private Keys**: Machine-specific device keys (`key.pem`, `https-key.pem`) and local indexes (`index-v2/`) are strictly excluded via `.gitignore`.
+- **Web GUI / REST API Key**: The checked-in `syncthing/config.xml` replaces the secret `<apikey>` with a placeholder. When running `install.sh` on a new machine, an automated secure 32-character hexadecimal API key is generated and configured locally.
+- **Active Config**: The active running configuration resides in `~/.local/state/syncthing/config.xml`, ensuring running state updates and secrets are never committed into version control.
 
 ---
 

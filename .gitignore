@@ -12,3 +12,21 @@ Thumbs.db
 # Shell history (should never be committed)
 .zsh_history
 .bash_history
+
+# Credentials, Environment & Secrets
+*.secret
+*.token
+*.env
+*.env.*
+!*.example
+settings.json
+oauth_creds.json
+
+# Syncthing secrets, keys, backups & local state
+syncthing/*.pem
+syncthing/*.key
+syncthing/index-v2/
+syncthing/config.xml.v*
+syncthing/config.xml.tmp*
+*.pem
+*.key
