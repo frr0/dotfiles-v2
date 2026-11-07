@@ -28,6 +28,6 @@ else
 fi
 
 
-# Added by Antigravity CLI installer
-export PATH="/home/francesco/.local/bin:$PATH"
-. "$HOME/.cargo/env"
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
