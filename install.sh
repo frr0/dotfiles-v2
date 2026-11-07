@@ -24,6 +24,7 @@ ASSUME_YES=false
 SKIP_PACKAGES=false
 PACKAGES_ONLY=false
 INSTALL_VSCODE_EXT=false
+CLI_ONLY=false
 
 # Usage information
 usage() {
@@ -35,6 +36,7 @@ Options:
   -y, --yes                Automatically confirm package installation (non-interactive)
   -s, --skip-packages      Skip package installation; only create dotfile symlinks
   -p, --packages-only      Only install software packages; skip creating symlinks
+  -c, --cli-only           Only install CLI essentials and dotfiles (skip GUI, IDEs, AI agents)
   -e, --vscode-extensions  Also install missing VS Code extensions from vscode/extensions.txt
   -h, --help               Display this help message
 
@@ -90,6 +92,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -p|--packages-only)
             PACKAGES_ONLY=true
+            shift
+            ;;
+        -c|--cli-only)
+            CLI_ONLY=true
             shift
             ;;
         -e|--vscode-extensions)
@@ -334,6 +340,9 @@ install_dnf() {
         zsh
         fzf
         eza
+        bat
+        fd-find
+        ripgrep
         htop
         ranger
         wl-clipboard
@@ -344,6 +353,8 @@ install_dnf() {
         zsh-syntax-highlighting
         zoxide
         podman
+        plocate
+        util-linux-user
         tailscale
         yt-dlp
     )
@@ -538,9 +549,37 @@ install_packages() {
             install_generic
             ;;
     esac
-    install_agy
+    if [ "$CLI_ONLY" = false ]; then
+        install_agy
+    fi
     echo ""
 }
+
+# CLI-only list of files to link
+CLI_LINKS=(
+    # Shell & Prompt
+    ".zshrc:${HOME}/.zshrc"
+    ".zshenv:${HOME}/.zshenv"
+    ".bashrc:${HOME}/.bashrc"
+    "starship.toml:${HOME}/.config/starship.toml"
+
+    # Tmux & Terminal
+    ".tmux.conf:${HOME}/.tmux.conf"
+    ".tmux.conf:${HOME}/.config/tmux/tmux.conf"
+
+    # Vim & Neovim (LazyVim)
+    ".vimrc:${HOME}/.vimrc"
+    "nvim/init.lua:${HOME}/.config/nvim/init.lua"
+    "nvim/lazy-lock.json:${HOME}/.config/nvim/lazy-lock.json"
+    "nvim/lazyvim.json:${HOME}/.config/nvim/lazyvim.json"
+    "nvim/stylua.toml:${HOME}/.config/nvim/stylua.toml"
+    "nvim/.neoconf.json:${HOME}/.config/nvim/.neoconf.json"
+    "nvim/lua/config/autocmds.lua:${HOME}/.config/nvim/lua/config/autocmds.lua"
+    "nvim/lua/config/keymaps.lua:${HOME}/.config/nvim/lua/config/keymaps.lua"
+    "nvim/lua/config/lazy.lua:${HOME}/.config/nvim/lua/config/lazy.lua"
+    "nvim/lua/config/options.lua:${HOME}/.config/nvim/lua/config/options.lua"
+    "nvim/lua/plugins/example.lua:${HOME}/.config/nvim/lua/plugins/example.lua"
+)
 
 # List of files to link: "source_file_rel_path:destination_path"
 LINKS=(
@@ -685,7 +724,12 @@ link_file() {
 
 create_symlinks() {
     echo -e "${BOLD}[2/2] Linking Configuration Files${NC}"
-    for item in "${LINKS[@]}"; do
+    local links_to_process=("${LINKS[@]}")
+    if [ "$CLI_ONLY" = true ]; then
+        links_to_process=("${CLI_LINKS[@]}")
+    fi
+
+    for item in "${links_to_process[@]}"; do
         src_rel="${item%%:*}"
         dest="${item##*:}"
         src="${DOTFILES_DIR}/${src_rel}"
@@ -697,6 +741,11 @@ create_symlinks() {
 
         link_file "$src" "$dest"
     done
+
+    if [ "$CLI_ONLY" = true ]; then
+        echo ""
+        return 0
+    fi
 
     # Ensure lockscreen/desktop wallpaper exists at expected path if missing
     local wp_src="${DOTFILES_DIR}/wallpapers/photo_2025-10-09_13-14-36.jpg"
